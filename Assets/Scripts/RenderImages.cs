@@ -11,6 +11,7 @@ public class RenderImages : MonoBehaviour
     public SpriteRenderer image3;
     public SpriteRenderer image4;
     public TextMesh levelDisplay;
+    public TextMesh timeDisplay;
 
     private class Level
     {
@@ -20,6 +21,7 @@ public class RenderImages : MonoBehaviour
     private StreamReader file;
     private StreamWriter output;
     private Level lvs;
+    private float levelTimer;
 
 
     void Start()
@@ -36,16 +38,35 @@ public class RenderImages : MonoBehaviour
         levelDisplay.color = Color.red;
         file.Close();
 
-
-    	image1.sprite = Resources.Load<Sprite>("soccer");
-    	image2.sprite = Resources.Load<Sprite>("basketball");
-    	image3.sprite = Resources.Load<Sprite>("football");
-    	image4.sprite = Resources.Load<Sprite>("baseball");
+        levelTimer = 20;
+    	
+    	
     }
 
     // Update is called once per frame
     void Update()
     {
-
+    	timeDisplay.text = ":"+levelTimer.ToString();
+    	timeDisplay.color = Color.black;
+    	levelTimer -=Time.deltaTime;
+    	if (levelTimer<0){
+    		image1.sprite=null;
+    		image2.sprite=null;
+    		image3.sprite=null;
+    		image4.sprite=null;
+    		levelDisplay.text = "GAME OVER!!!";
+    	}
+    	else{
+    		image1.sprite = Resources.Load<Sprite>("soccer");
+    		if(levelTimer<15){
+    			image2.sprite = Resources.Load<Sprite>("baseball");
+    		}
+    		if(levelTimer<10){
+    			image3.sprite = Resources.Load<Sprite>("football");
+    		}
+    		if(levelTimer<5){
+    			image4.sprite = Resources.Load<Sprite>("basketball");
+    		}
+    	}
     }
 }

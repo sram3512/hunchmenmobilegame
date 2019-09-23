@@ -16,6 +16,7 @@ public class ReadInputField : MonoBehaviour
 	private StreamWriter output;
 	private Level lvs;
   public TextMesh userResponse;
+  
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class ReadInputField : MonoBehaviour
    {
    	Debug.Log(answer);
    	if (string.Compare(answer,"Sports")==0){
+     
    		Debug.Log("Correct");
       userResponse.text = "Correct";
       userResponse.color = Color.green;
@@ -43,6 +45,7 @@ public class ReadInputField : MonoBehaviour
    		output = new StreamWriter("Assets/Resources/level.json");
    		output.WriteLine(JsonUtility.ToJson(lvs));
    		output.Close();
+      UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
    	}
    }
 }
