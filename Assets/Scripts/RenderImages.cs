@@ -28,7 +28,7 @@ public class RenderImages : MonoBehaviour
     {
 
     	Debug.Log("Rendering 4 pics Enter the required word");
-        file = new StreamReader("Assets/Resources/level.json");
+        file = new StreamReader("Assets/Resources/jsonData/user_info.json");
         string contents = file.ReadToEnd();
         lvs = JsonUtility.FromJson<Level>(contents);
         Debug.Log(lvs.level);
