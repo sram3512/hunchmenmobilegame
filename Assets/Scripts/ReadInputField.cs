@@ -21,7 +21,7 @@ public class ReadInputField : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-    	file = new StreamReader("Assets/Resources/level.json");
+        file = new StreamReader("Assets/Resources/jsonData/user_info.json");
         string contents = file.ReadToEnd();
         lvs = JsonUtility.FromJson<Level>(contents);
         Debug.Log(lvs.Stage);
@@ -42,7 +42,7 @@ public class ReadInputField : MonoBehaviour
       userResponse.color = Color.green;
    		lvs.level +=1;
    		Debug.Log(lvs.level);
-   		output = new StreamWriter("Assets/Resources/level.json");
+   		output = new StreamWriter("Assets/Resources/jsonData/user_info.json");
    		output.WriteLine(JsonUtility.ToJson(lvs));
    		output.Close();
       UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");

@@ -1,0 +1,10 @@
+{
+	"Level1": [{
+		"batman": ["alfred", "bane", "bat", "jocker"]
+	}, {
+		"avatar": ["cameron", "bluepeople", "alien", "planet"]
+	}],
+	"Level2": [{
+		"rocky": ["belt", "box", "eye_of_the_tiger", "stallone"]
+	}]
+}
