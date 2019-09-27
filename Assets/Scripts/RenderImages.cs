@@ -34,7 +34,7 @@ public class RenderImages : MonoBehaviour
         Debug.Log(lvs.level);
         //var levelDisplay = gameObject.GetComponent<TextMesh>();
 
-        levelDisplay.text = "Level "+lvs.level.ToString();
+        levelDisplay.text = StaticClass.LevelSelection;
         levelDisplay.color = Color.red;
         file.Close();
 
