@@ -23,6 +23,7 @@ public class SelectLevel : MonoBehaviour
     	GetComponent<Renderer>().material.color = Color.black;
     }
     void OnMouseDown(){
+        
     	UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
     }
 }

@@ -53,11 +53,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\LevelSelectionScript.cs" />
      <Compile Include="Assets\Scripts\MoveCamera.cs" />
      <Compile Include="Assets\Scripts\PlayerControls.cs" />
+     <Compile Include="Assets\Scripts\PrefrabSelectLevel.cs" />
+     <Compile Include="Assets\Scripts\PrefrabThemeSelect.cs" />
      <Compile Include="Assets\Scripts\ReadInputField.cs" />
      <Compile Include="Assets\Scripts\RenderImages.cs" />
      <Compile Include="Assets\Scripts\SelectLevel.cs" />
+     <Compile Include="Assets\Scripts\StaticClass.cs" />
+     <Compile Include="Assets\Scripts\ThemeRender.cs" />
      <None Include="Assets\Course Library\_Source_Files\_LICENSE.txt" />
      <None Include="Assets\Course Library\_Source_Files\Materials\UnlitVertexColour_Alpha.shader" />
  <Reference Include="Unity.TextMeshPro.Editor">
