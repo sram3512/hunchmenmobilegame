@@ -10,7 +10,6 @@ public class RenderImages : MonoBehaviour
     public SpriteRenderer image2;
     public SpriteRenderer image3;
     public SpriteRenderer image4;
-    public TextMesh levelDisplay;
     public TextMesh timeDisplay;
 
     private class Level
@@ -32,10 +31,8 @@ public class RenderImages : MonoBehaviour
         string contents = file.ReadToEnd();
         lvs = JsonUtility.FromJson<Level>(contents);
         Debug.Log(lvs.level);
-        //var levelDisplay = gameObject.GetComponent<TextMesh>();
+        
 
-        levelDisplay.text = StaticClass.LevelSelection;
-        levelDisplay.color = Color.red;
         file.Close();
 
         levelTimer = 20;
@@ -54,7 +51,6 @@ public class RenderImages : MonoBehaviour
     		image2.sprite=null;
     		image3.sprite=null;
     		image4.sprite=null;
-    		levelDisplay.text = "GAME OVER!!!";
     	}
     	else{
     		image1.sprite = Resources.Load<Sprite>("soccer");
