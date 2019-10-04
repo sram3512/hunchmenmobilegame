@@ -41,12 +41,6 @@ public class GameSceneRender : MonoBehaviour
     void Start()
     {
 
-    	 Debug.Log("Rendering 4 pics Enter the required word");
-        file = new StreamReader("Assets/Resources/jsonData/user_info.json");
-        string contents = file.ReadToEnd();
-        lvs = JsonUtility.FromJson<Level>(contents);
-        Debug.Log(lvs.level);
-        file.Close();
 
 
         var levelIndicator = Instantiate(hud,new Vector3(0.88f,2.06f,-5.0f),Quaternion.identity);
@@ -62,10 +56,10 @@ public class GameSceneRender : MonoBehaviour
 
         levelIndicator.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
 
-        image1=Instantiate(imageHolder, new Vector3(-1.58f,0.51f,-5.0f),Quaternion.identity).GetComponent<SpriteRenderer>();
-        image2=Instantiate(imageHolder, new Vector3(0.0f,0.51f,-5.0f),Quaternion.identity).GetComponent<SpriteRenderer>();
-        image3=Instantiate(imageHolder, new Vector3(-1.58f,-0.83f,-5.0f),Quaternion.identity).GetComponent<SpriteRenderer>();
-        image4=Instantiate(imageHolder, new Vector3(0.0f,-0.83f,-5.0f),Quaternion.identity).GetComponent<SpriteRenderer>();
+        image1=Instantiate(imageHolder, new Vector3(-2.58f,0.51f,-5.0f),Quaternion.identity).GetComponent<SpriteRenderer>();
+        image2=Instantiate(imageHolder, new Vector3(-0.9f,0.51f,-5.0f),Quaternion.identity).GetComponent<SpriteRenderer>();
+        image3=Instantiate(imageHolder, new Vector3(-2.58f,-0.83f,-5.0f),Quaternion.identity).GetComponent<SpriteRenderer>();
+        image4=Instantiate(imageHolder, new Vector3(-0.9f,-0.83f,-5.0f),Quaternion.identity).GetComponent<SpriteRenderer>();
 
 
         image1.GetComponent<Transform>().localScale = new Vector3(0.5f,0.5f,0.5f);
@@ -118,7 +112,7 @@ public class GameSceneRender : MonoBehaviour
         char[] KeyBoard = genCharSet("ball");
 
         Debug.Log(KeyBoard);
-        float x=3.25f;
+        float x=2.75f;
         float y=0.0f;
         for (int i=0;i<12;i++){
             Debug.Log(KeyBoard[i]);
@@ -127,7 +121,7 @@ public class GameSceneRender : MonoBehaviour
             temp.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(KeyBoard[i].ToString());
             temp.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
             if (i==2 || i==5 || i==8 || i==12){
-                x=3.25f;
+                x=2.75f;
                 y-=0.5f;
             }
             else{
@@ -138,7 +132,7 @@ public class GameSceneRender : MonoBehaviour
 
     void answerCreation(){
 
-        float bx=0.45f;
+        float bx=0.0f;
         float by=-1.92f;
         blankSprites = new SpriteRenderer[4];
       
@@ -159,13 +153,7 @@ public class GameSceneRender : MonoBehaviour
       	infoMessage.text = "Correct";
       	infoMessage.color = Color.green;
       	timeDisplay.text="";
-   		//lvs.level +=1;
-   		//Debug.Log(lvs.level);
-   		//output = new StreamWriter("Assets/Resources/jsonData/user_info.json");
-   		//output.WriteLine(JsonUtility.ToJson(lvs));
-   		//output.Close();
-   		StartCoroutine(ChangeScene());
-      //UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelectionScene");
+        StartCoroutine(ChangeScene());
    	}
    }
 
@@ -217,7 +205,7 @@ public class GameSceneRender : MonoBehaviour
     		
     		infoMessage.color = Color.red;
     		StartCoroutine(ChangeScene());
-    		//UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelectionScene");
+    		
 
     	}
     	else{

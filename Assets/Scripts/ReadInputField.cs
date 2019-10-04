@@ -21,13 +21,13 @@ public class ReadInputField : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        file = new StreamReader("Assets/Resources/jsonData/user_info.json");
-        string contents = file.ReadToEnd();
-        lvs = JsonUtility.FromJson<Level>(contents);
-        Debug.Log(lvs.Stage);
-        file.Close();
-    	var input = gameObject.GetComponent<InputField>();
-    	input.onEndEdit.AddListener(SubmitAnswerAction);
+        //file = new StreamReader("Assets/Resources/jsonData/user_info.json");
+        //string contents = file.ReadToEnd();
+        //lvs = JsonUtility.FromJson<Level>(contents);
+        //Debug.Log(lvs.Stage);
+        //file.Close();
+    	//var input = gameObject.GetComponent<InputField>();
+    	//input.onEndEdit.AddListener(SubmitAnswerAction);
     	
 
     }
