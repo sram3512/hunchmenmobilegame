@@ -9,7 +9,9 @@ public class GameSceneRender : MonoBehaviour
     // Start is called before the first frame update
     public GameObject hud;
     public GameObject imageHolder;
-    public UnityEngine.UI.InputField inputField;
+    public GameObject picCharacter;
+    public GameObject blankCharacter;
+    
 
     private SpriteRenderer image1;
     private SpriteRenderer image2;
@@ -32,6 +34,10 @@ public class GameSceneRender : MonoBehaviour
     private TextMesh outputMessage;
     private TextMesh infoMessage;
 
+    private SpriteRenderer[] blankSprites;
+    private char[] alphabet = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O',
+                                'P','Q','R','S','T','U','V','W','X','Y','Z'};
+
     void Start()
     {
 
@@ -40,8 +46,6 @@ public class GameSceneRender : MonoBehaviour
         string contents = file.ReadToEnd();
         lvs = JsonUtility.FromJson<Level>(contents);
         Debug.Log(lvs.level);
-        
-
         file.Close();
 
 
@@ -51,13 +55,7 @@ public class GameSceneRender : MonoBehaviour
         timeDisplay = Instantiate(hud, new Vector3(-1.42f,2.06f,-5.0f),Quaternion.identity).GetComponent<TextMesh>();
         timeDisplay.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
 
-        numChars = Instantiate(hud, new Vector3(-3.42f,0.06f,-5.0f),Quaternion.identity).GetComponent<TextMesh>();
-        numChars.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
-
-        numChars.text = "6";
-
-
-        infoMessage = Instantiate(hud, new Vector3(2.82f,0.06f,-5.0f),Quaternion.identity).GetComponent<TextMesh>();
+        infoMessage = Instantiate(hud, new Vector3(-2.82f,0.06f,-5.0f),Quaternion.identity).GetComponent<TextMesh>();
         infoMessage.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
 
 
@@ -80,46 +78,129 @@ public class GameSceneRender : MonoBehaviour
         textmeshLevel.color = Color.red;
 
 
-        inputField.characterLimit = 6;
-        inputField.onValueChanged.AddListener(characterReducer);
-
        
 
         levelTimer = 20;
 
+        keyBoardCreation();
+        answerCreation();
+
+
+    }
+    char[] shuffle(char[] keyboard){
+        for (int k=0;k<keyboard.Length;k++){
+                char tmp = keyboard[k];
+                int pos = Random.Range(0,keyboard.Length-1);
+                keyboard[k]=keyboard[pos];
+                keyboard[pos]=tmp;
+        }
+        return keyboard;
+    }
+
+    char[] genCharSet(string answer){
+        char[] charAnswer = answer.ToUpper().ToCharArray();
+        if (answer.Length==12){
+            return charAnswer;
+        }
+        else{
+            char[] alphaset = new char[12-charAnswer.Length];
+            for(int j =0;j<12-charAnswer.Length;j++){
+                alphaset[j] = alphabet[Random.Range(0,alphabet.Length-1)];
+            }
+            char[] keyboard = new char[12];
+            charAnswer.CopyTo(keyboard,0);
+            alphaset.CopyTo(keyboard,charAnswer.Length);
+            return shuffle(keyboard);
+        }
+    }
+    void keyBoardCreation(){
+        //string [] KeyBoard = new string[] {"A","B","C","D","E","F","G","H","I","J"};
+        char[] KeyBoard = genCharSet("ball");
+
+        Debug.Log(KeyBoard);
+        float x=3.25f;
+        float y=0.0f;
+        for (int i=0;i<12;i++){
+            Debug.Log(KeyBoard[i]);
+            var temp = Instantiate(picCharacter, new Vector3(x,y,-5.0f), Quaternion.identity);
+            temp.name=KeyBoard[i].ToString();
+            temp.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(KeyBoard[i].ToString());
+            temp.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
+            if (i==2 || i==5 || i==8 || i==12){
+                x=3.25f;
+                y-=0.5f;
+            }
+            else{
+                x-=0.5f;
+            }
+        }
+    }
+
+    void answerCreation(){
+
+        float bx=0.45f;
+        float by=-1.92f;
+        blankSprites = new SpriteRenderer[4];
+      
+        for(int i=0;i<4;i++){
+            var blk = Instantiate(blankCharacter, new Vector3(bx,by,-5.0f), Quaternion.identity);
+            blk.name = "Blank";
+            blankSprites[i] = blk.GetComponent<SpriteRenderer>();
+            blankSprites[i].GetComponent<Transform>().Rotate(new Vector3(0,180,0));
+            bx-=0.5f;
+        }
     }
     void SubmitAnswerAction(string answer)
    {
    	Debug.Log(answer);
-   	if (string.Compare(answer,"Sports")==0){
+   	if (string.Compare(answer,"BALL")==0){
      	
    		Debug.Log("Correct");
       	infoMessage.text = "Correct";
       	infoMessage.color = Color.green;
       	timeDisplay.text="";
-   		lvs.level +=1;
-   		Debug.Log(lvs.level);
-   		output = new StreamWriter("Assets/Resources/jsonData/user_info.json");
-   		output.WriteLine(JsonUtility.ToJson(lvs));
-   		output.Close();
+   		//lvs.level +=1;
+   		//Debug.Log(lvs.level);
+   		//output = new StreamWriter("Assets/Resources/jsonData/user_info.json");
+   		//output.WriteLine(JsonUtility.ToJson(lvs));
+   		//output.Close();
    		StartCoroutine(ChangeScene());
       //UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelectionScene");
    	}
    }
 
-    void characterReducer(string ans){
-    	Debug.Log(ans);
-    	var remaining = 6-ans.Length;
-    	numChars.text = remaining.ToString();
-    	if (remaining==0){
-    		SubmitAnswerAction(ans);
-    	}
+   int findFirstBlank(){
+        for(int i=0;i<blankSprites.Length;i++){
+            if (blankSprites[i].name=="Blank"){
+                return i;
+            }
+        }
+        return -1;
     }
+   
+   string readAnswer(){
+        string ans="";
+        for(int i=0;i<blankSprites.Length;i++){
+            ans+=blankSprites[i].name;
+        }
+        return ans;
+   }
    
     // Update is called once per frame
     void Update()
     {
 
+        if(findFirstBlank()==-1){
+            SubmitAnswerAction(readAnswer());
+        }
+        if(StaticClass.KeyBoardInput!=null){
+            int pos = findFirstBlank();
+            if (pos!=-1){
+                blankSprites[pos].name=StaticClass.KeyBoardInput;
+                blankSprites[pos].sprite = Resources.Load<Sprite>(StaticClass.KeyBoardInput);
+            }
+            StaticClass.KeyBoardInput=null;
+        }
 
     	timeDisplay.text = ":"+levelTimer.ToString();
     	timeDisplay.color = Color.black;
@@ -131,7 +212,7 @@ public class GameSceneRender : MonoBehaviour
     		image4.sprite=null;
     		timeDisplay.text="";
     		
-    		infoMessage.text = "GAME OVER!!!!";
+    		infoMessage.text = "GAME\nOVER!!!!";
     		
     		
     		infoMessage.color = Color.red;
