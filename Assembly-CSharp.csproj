@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\ReadInputField.cs" />
      <Compile Include="Assets\Scripts\RemoveChar.cs" />
      <Compile Include="Assets\Scripts\RenderImages.cs" />
+     <Compile Include="Assets\Scripts\RenderSpriteURL.cs" />
      <Compile Include="Assets\Scripts\SelectLevel.cs" />
      <Compile Include="Assets\Scripts\StaticClass.cs" />
      <Compile Include="Assets\Scripts\ThemeRender.cs" />
