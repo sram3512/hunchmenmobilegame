@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PrefrabSelectLevel : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -23,8 +24,7 @@ public class PrefrabSelectLevel : MonoBehaviour
     	GetComponent<Renderer>().material.color = Color.black;
     }
     void OnMouseDown(){
-        Debug.Log(GetComponent<TextMesh>().text);
-        StaticClass.LevelSelection = GetComponent<TextMesh>().text;
+        StaticClass.LevelSelection = GetComponent<TextMesh>().text.Split()[1];
     	UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
     }
 }

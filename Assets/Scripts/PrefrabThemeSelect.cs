@@ -23,7 +23,7 @@ public class PrefrabThemeSelect : MonoBehaviour
     	GetComponent<Renderer>().material.color = Color.black;
     }
     void OnMouseDown(){
-        StaticClass.ThemeSelection = GetComponent<TextMesh>().text;
+        StaticClass.ThemeSelection = GetComponent<TextMesh>().text.ToLower().Replace(" ","");
     	UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelectionScene");
     }
 }
