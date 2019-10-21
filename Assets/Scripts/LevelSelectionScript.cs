@@ -12,7 +12,8 @@ public class LevelSelectionScript : MonoBehaviour
     	float x = -14.93f;
     	float y = 7.15f;
     	float z = -5.23f;
-        for (int i=0;i<9;i++){
+        StaticClass.MaxLevels = 9;
+        for (int i=0;i<StaticClass.MaxLevels;i++){
             var lvs = Instantiate(levelSign, new Vector3(x,y,z),Quaternion.identity);
             lvs.GetComponent<TextMesh>().text = "Level "+(i+1).ToString();
             x+=2.0f;
@@ -22,8 +23,7 @@ public class LevelSelectionScript : MonoBehaviour
             }
            
         }
-        //var lvs = Instantiate(levelSign, new Vector3(x,y,z),Quaternion.identity);
-        //lvs.GetComponent<TextMesh>().text = "Level 12";
+       
         
     }
 

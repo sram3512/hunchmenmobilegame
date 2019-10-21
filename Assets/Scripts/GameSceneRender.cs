@@ -60,16 +60,47 @@ public class GameSceneRender : MonoBehaviour
         public List<string> imageList;
     }
 
+
+    [System.Serializable]
+    private class User{
+        public string name;
+        public string email_id;
+        public int currency;
+        public List<Themeprogress> progress;
+        
+    }
+
+    [System.Serializable]
+    private class Themeprogress{
+        public string theme;
+        public int unlocked;
+        public List<Questionpool> previousQuestion;
+    }
+
+    [System.Serializable]
+    private class Questionpool{
+        public int level;
+        public int question;
+    }
+
+
     private Theme themeObject;
     private string Answer;
     private List<string> Questions;
     private string imageserverURL;
 
     private Sprite[] questionSprites;
+    private string userPath;
+    private bool currencyTrigger;
+    private int currentLevel;
+    private Themeprogress themeInstance;
 
     void Start()
     {
 
+        userPath = "Assets/Resources/jsonData/user_info.json";
+
+        currentLevel = int.Parse(StaticClass.LevelSelection);
 
 
         var levelIndicator = Instantiate(hud,new Vector3(0.88f,2.06f,-5.0f),Quaternion.identity);
@@ -101,9 +132,13 @@ public class GameSceneRender : MonoBehaviour
         textmeshLevel.color = Color.red;
 
         levelTimer = 20;
+        currencyTrigger = false;
 
-         Debug.Log(StaticClass.LevelSelection);
+        Debug.Log(StaticClass.LevelSelection);
         Debug.Log(StaticClass.ThemeSelection);
+
+        themeInstance = readTheme(readUserinfo());
+
         readJson("Assets/Resources/jsonData/"+StaticClass.ThemeSelection+".json");
 
         keyBoardCreation();
@@ -121,6 +156,15 @@ public class GameSceneRender : MonoBehaviour
                 keyboard[pos]=tmp;
         }
         return keyboard;
+    }
+    int[] shuffleInt(int[] data){
+        for (int k=0;k<data.Length;k++){
+                int tmp = data[k];
+                int pos = Random.Range(0,data.Length-1);
+                data[k]=data[pos];
+                data[pos]=tmp;
+        }
+        return data;
     }
 
     char[] genCharSet(string answer){
@@ -175,13 +219,16 @@ public class GameSceneRender : MonoBehaviour
     }
     void SubmitAnswerAction(string answer)
    {
-   	Debug.Log(answer);
    	if (string.Compare(answer,Answer.ToUpper())==0){
      	
-   		Debug.Log("Correct");
+   		
       	infoMessage.text = "Correct";
       	infoMessage.color = Color.green;
       	timeDisplay.text="";
+        if (currencyTrigger==false){
+            computeReward();
+        }
+        
         StartCoroutine(ChangeScene());
    	}
    }
@@ -202,6 +249,51 @@ public class GameSceneRender : MonoBehaviour
         }
         return ans;
    }
+   Themeprogress readTheme(User userObj){
+
+    Themeprogress Theme = null;
+    for(int i=0;i<userObj.progress.Count;i++){
+        if(userObj.progress[i].theme==StaticClass.ThemeSelection){
+            Debug.Log("Fount at:"+i.ToString());
+            Theme=(Themeprogress)userObj.progress[i];
+        }
+    }
+    return Theme;
+   }
+   User writeTheme(User userObj, Themeprogress instance){
+     
+    for(int i=0;i<userObj.progress.Count;i++){
+        if(userObj.progress[i].theme==instance.theme){
+           userObj.progress[i]=instance;
+        }
+    }
+    return userObj;
+   }
+   void computeReward(){
+
+        currencyTrigger = true;
+        int maxCurrency = 20;
+        if(levelTimer<15){
+            maxCurrency=15;
+        }
+        if(levelTimer<10){
+            maxCurrency=10;
+        }
+        if(levelTimer<5){
+            maxCurrency=5;
+        }
+        User currencyObj = readUserinfo();
+        currencyObj.currency += maxCurrency;
+        //Unlock next level
+        
+        Themeprogress thm = readTheme(currencyObj);
+        if(thm.unlocked==currentLevel && thm.unlocked+1<StaticClass.MaxLevels){
+            Debug.Log("valid");
+            thm.unlocked += 1;
+            
+        }
+        writeUserinfo(writeTheme(currencyObj,thm));
+   }
    
    void readJson(string filePath){
         StreamReader file = new StreamReader(filePath);
@@ -218,7 +310,8 @@ public class GameSceneRender : MonoBehaviour
         int gameLevel = int.Parse(StaticClass.LevelSelection)-1;
 
         try{
-            int poolSelection = Random.Range(0,themeObject.levels[gameLevel].pool.Count);
+
+            int poolSelection = randomQuestionWithTracking(themeObject.levels[gameLevel].pool.Count); 
         
             Answer = themeObject.levels[gameLevel].pool[poolSelection].answer;
             Questions = themeObject.levels[gameLevel].pool[poolSelection].imageList;
@@ -230,6 +323,63 @@ public class GameSceneRender : MonoBehaviour
         }
        
            
+    }
+    int randomQuestionWithTracking(int poolSize){
+
+
+        Debug.Log(poolSize);     
+
+            int pos = -1;
+            bool found = false;
+            Debug.Log("Pos:"+pos.ToString());
+
+            List<int> tmp = new List<int>();
+            for(int i=0;i<poolSize;i++){
+                tmp.Add(i);
+            }
+        
+            for(int i=0;i<themeInstance.previousQuestion.Count;i++){
+                if(themeInstance.previousQuestion[i].level==currentLevel){
+                    found = true;
+                    int prevQ = themeInstance.previousQuestion[i].question;
+                        
+                    tmp.RemoveAt(prevQ);
+                    pos = shuffleInt(tmp.ToArray())[0];
+
+                    themeInstance.previousQuestion[i].question=pos;
+                    }
+                   
+            }
+            if(!found){
+                pos = shuffleInt(tmp.ToArray())[0];
+                Questionpool qp = new Questionpool();
+                qp.level=currentLevel;
+                qp.question=pos;
+
+                themeInstance.previousQuestion.Add(qp);
+            }
+            
+
+        writeUserinfo(writeTheme(readUserinfo(),themeInstance));
+        return pos;
+    }
+
+    void writeUserinfo(User userobj){
+        StreamWriter writer = new StreamWriter(userPath);
+        writer.WriteLine(JsonUtility.ToJson(userobj));
+        writer.Close();
+    }
+    User readUserinfo(){
+        StreamReader file = new StreamReader(userPath);
+        string line;
+        string usercontents="";
+        while((line = file.ReadLine())!=null){
+            usercontents+=line.Replace("\t","");
+        }
+        file.Close();
+
+        return JsonUtility.FromJson<User>(usercontents);
+
     }
     IEnumerator fetchImages(){
         Debug.Log("Fetching images");

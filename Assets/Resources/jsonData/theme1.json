@@ -11,6 +11,45 @@
 
 			 }
 			]
+		  },
+		  {
+	"name":"level2",
+	"difficulty":1,
+	"pool":[{"answer":"ball",
+			 "imageList":["football.png","basketball.jpeg","baseball.jpeg","soccer.png"]
+			 },
+			 { 
+			 	"answer":"sports",
+			 	"imageList":["football.png","basketball.jpeg","baseball.jpeg","soccer.png"]
+
+			 }
+			]
+		  },
+		  {
+	"name":"level3",
+	"difficulty":1,
+	"pool":[{"answer":"ball",
+			 "imageList":["football.png","basketball.jpeg","baseball.jpeg","soccer.png"]
+			 },
+			 { 
+			 	"answer":"sports",
+			 	"imageList":["football.png","basketball.jpeg","baseball.jpeg","soccer.png"]
+
+			 }
+			]
+		  },
+		  {
+	"name":"level4",
+	"difficulty":1,
+	"pool":[{"answer":"ball",
+			 "imageList":["football.png","basketball.jpeg","baseball.jpeg","soccer.png"]
+			 },
+			 { 
+			 	"answer":"sports",
+			 	"imageList":["football.png","basketball.jpeg","baseball.jpeg","soccer.png"]
+
+			 }
+			]
 		  }
 		 ],
 "imageServer":"http://spriteserver.sanupindi.com:5000/getimage?"
