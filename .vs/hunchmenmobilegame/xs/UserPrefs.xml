@@ -1,9 +1,8 @@
 ﻿<Properties StartupConfiguration="{68547E86-328D-8642-19B9-FDB05BC5BB81}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameSceneRender.cs">
     <Files>
-      <File FileName="Assets/Scripts/GameSceneRender.cs" Line="102" Column="17" />
-      <File FileName="Assets/Scripts/LevelSelectionScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/jsonData/user_info.json" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/LevelSelectionScript.cs" Line="46" Column="31" />
+      <File FileName="Assets/Scripts/GameSceneRender.cs" Line="478" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

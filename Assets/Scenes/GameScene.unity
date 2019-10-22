@@ -310,7 +310,8 @@ MonoBehaviour:
     type: 3}
   blankCharacter: {fileID: 4745877630166833707, guid: 8cbd531ac650449eaa52c66851918aa3,
     type: 3}
-  coins: {fileID: 4279239989739990357, guid: 28722fc77bc024fbdbf97f98a612ad71, type: 3}
+  currencyDisplay: {fileID: 3414506188881721824, guid: 86535fe635a354022ad8ecae0f67a512,
+    type: 3}
 --- !u!1 &1482343782
 GameObject:
   m_ObjectHideFlags: 0
