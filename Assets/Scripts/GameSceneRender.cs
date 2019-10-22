@@ -16,6 +16,7 @@ public class GameSceneRender : MonoBehaviour
     public GameObject imageHolder;
     public GameObject picCharacter;
     public GameObject blankCharacter;
+ 
     
 
     private SpriteRenderer image1;

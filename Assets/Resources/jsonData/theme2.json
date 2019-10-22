@@ -1,13 +1,13 @@
 {
 "levels":[{
 	"name":"level1",
-	"difficulty":1,
-	"pool":[{"answer":"ball",
-			 "imageList":["football.png","basketball.jpeg","baseball.jpeg","soccer.png"]
+	"difficulty":2,
+	"pool":[{"answer":"gringotts",
+			 "imageList":["gringotts1.jpg","gringotts2.jpg","gringotts3.jpg","gringotts4.jpg"]
 			 },
 			 { 
-			 	"answer":"sports",
-			 	"imageList":["football.png","basketball.jpeg","baseball.jpeg","soccer.png"]
+			 	"answer":"hagrid",
+			 	"imageList":["hagrid1.jpg","hagrid2.jpg","hagrid3.jpg","hagrid4.jpg"]
 
 			 }
 			]
