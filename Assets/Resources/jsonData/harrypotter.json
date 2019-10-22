@@ -117,7 +117,7 @@
             ]
                   }
   ],
-"imageServer":"http://127.0.0.1:5000/getimage?"
+"imageServer":"http://spriteserver.sanupindi.com:5000/getimage?"
 }
 
 
