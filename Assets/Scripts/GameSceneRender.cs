@@ -16,11 +16,9 @@ public class GameSceneRender : MonoBehaviour
     public GameObject imageHolder;
     public GameObject picCharacter;
     public GameObject blankCharacter;
-<<<<<<< HEAD
- 
-=======
+
     public GameObject coins;
->>>>>>> coins test
+
     
 
     private SpriteRenderer image1;
