@@ -16,7 +16,11 @@ public class GameSceneRender : MonoBehaviour
     public GameObject imageHolder;
     public GameObject picCharacter;
     public GameObject blankCharacter;
+<<<<<<< HEAD
  
+=======
+    public GameObject coins;
+>>>>>>> coins test
     
 
     private SpriteRenderer image1;
@@ -34,6 +38,7 @@ public class GameSceneRender : MonoBehaviour
     private TextMesh numChars;
     private TextMesh outputMessage;
     private TextMesh infoMessage;
+    private TextMesh coinVal;
 
     private SpriteRenderer[] blankSprites;
     private char[] alphabet = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O',
@@ -95,15 +100,16 @@ public class GameSceneRender : MonoBehaviour
     private bool currencyTrigger;
     private int currentLevel;
     private Themeprogress themeInstance;
+    public static int coinsTotal;
 
     void Start()
     {
 
         userPath = "Assets/Resources/jsonData/user_info.json";
-
+        //coinsTotal = 0;
         currentLevel = int.Parse(StaticClass.LevelSelection);
-
-
+        //coinVal = coins.GetComponent<TextMesh>();
+        coinVal = Instantiate(coins, new Vector3(0.55f, 2.06f, -5.0f), Quaternion.identity).GetComponent<TextMesh>();
         var levelIndicator = Instantiate(hud,new Vector3(0.88f,2.06f,-5.0f),Quaternion.identity);
         var textmeshLevel = levelIndicator.GetComponent<TextMesh>();
 
@@ -451,7 +457,11 @@ public class GameSceneRender : MonoBehaviour
                 
                 //Resources.Load<Sprite>("<file_name>");
     	}
-        
+        //Update the coinValue
+        User currencyObj = readUserinfo();
+        Debug.Log("CoinVal:" + currencyObj.currency.ToString());
+        coinVal.text = currencyObj.currency.ToString();
+
     }
      IEnumerator ChangeScene(){
      	yield return new WaitForSeconds(1);
