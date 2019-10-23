@@ -110,9 +110,9 @@ public class GameSceneRender : MonoBehaviour
         currentLevel = int.Parse(StaticClass.LevelSelection);
         //coinVal = coins.GetComponent<TextMesh>();
 
-        var coinsAmount = Instantiate(currencyDisplay, new Vector3(1.9f, 2.06f, -5f), Quaternion.identity);
+        var coinsAmount = Instantiate(currencyDisplay, new Vector3(0.5f, 2.06f, -5f), Quaternion.identity);
         coinsAmount.GetComponent<Transform>().Rotate(new Vector3(0, 180, 0));
-        coinsAmount.GetComponent<SpriteRenderer>().transform.position = new Vector3(3.63f, -0.44f, -4.86f);
+        //coinsAmount.GetComponent<SpriteRenderer>().transform.position = new Vector3(3.63f, -0.44f, -4.86f);
         //coinsAmount.GetComponent<TextMesh>().transform.position = new Vector3(1.9f, 2.06f, -5f);
 
 
