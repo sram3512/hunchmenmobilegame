@@ -1,0 +1,85 @@
+
+{
+"levels":[
+
+{
+            "name":"level1",
+            "difficulty":1,
+            "pool": [{"answer":"batman",
+                     "imageList":["batman1","batman2","batman3","batman4"]
+                     },
+
+                      {
+                        "answer":"tangled",
+                        "imageList": ["tangled1","tangled2","tangled3","tangled4"]
+                      },
+                      {
+                        "answer":"thor",
+                        "imageList": ["thor1","thor2","thor3","thor4"]
+                      }
+    ]
+		  },
+
+  {
+            "name":"level2",
+            "difficulty":2,
+            "pool": [{"answer":"coco",
+                     "imageList":["coco1","coco2","coco3","coco4"]
+                     },
+                     {
+                        "answer":"twilight",
+                        "imageList":["twilight1","twilight2","twilight3","twilight4"]
+
+                     },
+                      {
+                        "answer": "jumanji",
+                        "imageList": ["jumanji1", "jumanji2", "jumanji3", "jumanji4"]
+                      }
+            ]
+                  },
+
+  {
+            "name":"level3",
+            "difficulty":3,
+            "pool": [{"answer":"cinderella",
+                     "imageList":["cinderella1","cinderella2","cinderella3","cinderella4"]
+                     },
+                     {
+                        "answer":"scarface",
+                        "imageList":["scarface1","scarface2","scarface3","scarface4"]
+
+                     },
+                      {
+                        "answer": "moana",
+                        "imageList": ["moana1","moana2","moana3","moana4"]
+                      }
+            ]
+                  },
+
+  {
+            "name":"level4",
+            "difficulty":2,
+            "pool": [{"answer":"rocky",
+                     "imageList":["rocky1","rocky2","rocky3","rocky4"]
+                     },
+                     {
+                        "answer":"titanic",
+                        "imageList":["titanic1","titanic2","titanic3","titanic4"]
+
+                     },
+                      {
+                        "answer": "deadpool",
+                        "imageList": ["deadpool1","deadpool2","deadpool3","deadpool4"]
+                      }
+            ]
+                  }
+
+
+
+
+  ],
+"imageServer":"http://spriteserver.sanupindi.com:5000/getimage?"
+}
+
+
+
