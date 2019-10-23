@@ -7,8 +7,6 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 
 
-
-
 public class GameSceneRender : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -16,10 +14,11 @@ public class GameSceneRender : MonoBehaviour
     public GameObject imageHolder;
     public GameObject picCharacter;
     public GameObject blankCharacter;
-
+    public GameObject freezeTime;
     public GameObject currencyDisplay;
+    private GameObject freezeTimeObject;
 
-    
+
 
     private SpriteRenderer image1;
     private SpriteRenderer image2;
@@ -104,7 +103,6 @@ public class GameSceneRender : MonoBehaviour
 
     void Start()
     {
-
         userPath = "Assets/Resources/jsonData/user_info.json";
         //coinsTotal = 0;
         currentLevel = int.Parse(StaticClass.LevelSelection);
@@ -115,9 +113,11 @@ public class GameSceneRender : MonoBehaviour
         //coinsAmount.GetComponent<SpriteRenderer>().transform.position = new Vector3(3.63f, -0.44f, -4.86f);
         //coinsAmount.GetComponent<TextMesh>().transform.position = new Vector3(1.9f, 2.06f, -5f);
 
-
         var coinsText1 = GameObject.FindWithTag("currencyValue").GetComponent<TextMesh>();
         //coinVal = Instantiate(coins, new Vector3(0.55f, 2.06f, -5.0f), Quaternion.identity).GetComponent<TextMesh>();
+
+        Instantiate(freezeTime, new Vector3(2.2f, 1.7f, -5.0f), Quaternion.identity);
+        freezeTimeObject = freezeTime.gameObject;
 
         User currencyObj = readUserinfo();
         Debug.Log("CoinVal:" + currencyObj.currency.ToString());
@@ -425,7 +425,6 @@ public class GameSceneRender : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if(findFirstBlank()==-1){
             SubmitAnswerAction(readAnswer());
         }
@@ -438,10 +437,28 @@ public class GameSceneRender : MonoBehaviour
             StaticClass.KeyBoardInput=null;
         }
 
-    	timeDisplay.text = ":"+levelTimer.ToString();
-    	timeDisplay.color = Color.black;
-    	levelTimer -=Time.deltaTime;
-    	if (levelTimer<0){
+        timeDisplay.text = ":" + System.String.Format("{0:0.0}", levelTimer);
+
+        if ((Time.time >= StaticClass.currentFreezeTimeEnd) && StaticClass.freezeTimeEnabled == true)
+        {
+            StaticClass.freezeTimeEnabled = false;
+
+        }
+
+        if (StaticClass.freezeTimeEnabled)
+        {
+            levelTimer -= Time.deltaTime / StaticClass.freezeTimeFactor;
+            timeDisplay.color = Color.cyan;
+        }
+        else
+        {
+            levelTimer -= Time.deltaTime;
+            timeDisplay.color = Color.red;
+        }
+        
+        
+
+        if (levelTimer<0){
     		image1.sprite=null;
     		image2.sprite=null;
     		image3.sprite=null;
@@ -453,7 +470,7 @@ public class GameSceneRender : MonoBehaviour
     		
     		infoMessage.color = Color.red;
     		StartCoroutine(ChangeScene());
-    		
+    	
 
     	}
     	else{
