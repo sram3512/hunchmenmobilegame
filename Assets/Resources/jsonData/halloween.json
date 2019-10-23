@@ -1,0 +1,23 @@
+
+{
+"levels":[
+  {
+            "name":"level1",
+            "difficulty":1,
+            "pool": [{"answer":"scream",
+                     "imageList":["scream1.jpg","scream2.jpg","scream3.jpg","scream4.png"]
+                     },
+                     {
+                        "answer":"casper",
+                        "imageList":["casper1.png","casper2.png","casper3.png","casper4.jpg"]
+
+                     },
+                      {
+                        "answer":"hocuspocus",
+                        "imageList": ["hocuspocus1.jpg","hocuspocus2.jpg","hocuspocus3.jpg","hocuspocus4.jpg"]
+                      }
+            ]
+                  }
+        ],
+"imageServer":"http://spriteserver.sanupindi.com:5000/getimage?"
+}
