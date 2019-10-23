@@ -16,7 +16,9 @@ public class GameSceneRender : MonoBehaviour
     public GameObject imageHolder;
     public GameObject picCharacter;
     public GameObject blankCharacter;
- 
+
+    public GameObject currencyDisplay;
+
     
 
     private SpriteRenderer image1;
@@ -34,6 +36,8 @@ public class GameSceneRender : MonoBehaviour
     private TextMesh numChars;
     private TextMesh outputMessage;
     private TextMesh infoMessage;
+    private TextMesh coinVal;
+    private TextMesh coinsText;
 
     private SpriteRenderer[] blankSprites;
     private char[] alphabet = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O',
@@ -95,14 +99,30 @@ public class GameSceneRender : MonoBehaviour
     private bool currencyTrigger;
     private int currentLevel;
     private Themeprogress themeInstance;
+    public static int coinsTotal;
+
 
     void Start()
     {
 
         userPath = "Assets/Resources/jsonData/user_info.json";
-
+        //coinsTotal = 0;
         currentLevel = int.Parse(StaticClass.LevelSelection);
+        //coinVal = coins.GetComponent<TextMesh>();
 
+        var coinsAmount = Instantiate(currencyDisplay, new Vector3(0.5f, 2.06f, -5f), Quaternion.identity);
+        coinsAmount.GetComponent<Transform>().Rotate(new Vector3(0, 180, 0));
+        //coinsAmount.GetComponent<SpriteRenderer>().transform.position = new Vector3(3.63f, -0.44f, -4.86f);
+        //coinsAmount.GetComponent<TextMesh>().transform.position = new Vector3(1.9f, 2.06f, -5f);
+
+
+        var coinsText1 = GameObject.FindWithTag("currencyValue").GetComponent<TextMesh>();
+        //coinVal = Instantiate(coins, new Vector3(0.55f, 2.06f, -5.0f), Quaternion.identity).GetComponent<TextMesh>();
+
+        User currencyObj = readUserinfo();
+        Debug.Log("CoinVal:" + currencyObj.currency.ToString());
+        //coinVal.text = currencyObj.currency.ToString();
+        coinsText1.text = currencyObj.currency.ToString();
 
         var levelIndicator = Instantiate(hud,new Vector3(0.88f,2.06f,-5.0f),Quaternion.identity);
         var textmeshLevel = levelIndicator.GetComponent<TextMesh>();
@@ -451,7 +471,14 @@ public class GameSceneRender : MonoBehaviour
                 
                 //Resources.Load<Sprite>("<file_name>");
     	}
-        
+        //Update the coinValue
+        var coinsText1 = GameObject.FindWithTag("currencyValue").GetComponent<TextMesh>();
+        User currencyObj = readUserinfo();
+        Debug.Log("CoinVal:" + currencyObj.currency.ToString());
+        //coinVal.text = currencyObj.currency.ToString();
+        coinsText1.text = currencyObj.currency.ToString();
+
+
     }
      IEnumerator ChangeScene(){
      	yield return new WaitForSeconds(1);
