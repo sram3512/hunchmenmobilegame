@@ -2,7 +2,7 @@
 "levels":[
 
 {
-            "name":"level1",
+            "name":"level5",
             "difficulty":3,
             "pool": [
                     {
@@ -13,26 +13,18 @@
                         "answer":"hogsmeade",
                         "imageList":["hogsmeade1.jpg","hogsmeade2.jpg","hogsmeade3.jpg","hogsmeade4.jpg"]
 
-                     },
-                    {
-                      "answer":"dementor",
-                      "imageList": ["dementor1.jpg","dementor2.jpg","dementor3.jpg","dementor4.png"]
-                    }
+                     }
+                    
             ]
                   },
 
   {
-            "name":"level2",
+            "name":"level6",
             "difficulty":2,
             "pool": [
                     {
                       "answer":"petrify",
                      "imageList":["petrify1.jpg","petrify2.jpg","petrify3.jpg","petrify4.jpg"]
-                     },
-                     {
-                        "answer":"ollivanders",
-                        "imageList":["ollivanders1.jpg","ollivanders2.jpg","ollivanders3.jpg","ollivanders4.jpg"]
-
                      },
                     {
                       "answer":"fluffy",
@@ -42,39 +34,15 @@
                   },
 
   {
-            "name":"level3",
+            "name":"level4",
             "difficulty":1,
             "pool": [
-                    {
-                      "answer":"gryffindor",
-                     "imageList":["gryffindor1.jpg","gryffindor2.jpg","gryffindor3.jpg","gryffindor4.jpg"]
-                     },
-                     {
-                        "answer":"slytherin",
-                        "imageList":["slytherin1.jpg","slytherin2.jpg","slytherin3.png","slytherin4.jpg"]
-
-                     },
+                    
                     {
                       "answer":"aurors",
                       "imageList": ["aurors1.jpg","aurors2.jpg","aurors3.jpg","aurors4.jpg"]
-                    }
-            ]
-                  },
-
-  {
-            "name":"level4",
-            "difficulty":2,
-            "pool": [
-                    {
-                      "answer":"ravenclaw",
-                     "imageList":["ravenclaw1.jpg","ravenclaw2.jpg","ravenclaw3.png","ravenclaw4.jpg"]
-                     },
-                     {
-                        "answer":"hufflepuff",
-                        "imageList":["hufflepuff1.jpg","hufflepuff2.png","hufflepuff3.jpeg","hufflepuff4.jpg"]
-
-                     },
-                    {
+                    },
+                {
                       "answer":"animagus",
                       "imageList": ["animagus1.jpg","animagus2.jpg","animagus3.jpg","animagus4.jpg"]
                     }
@@ -82,18 +50,39 @@
                   },
 
   {
-            "name":"level5",
+            "name":"level3",
+            "difficulty":2,
+            "pool": [
+                    {
+                      "answer":"weasley",
+                     "imageList":["weasley1.jpg","weasley2.jpg","weasley3.png","weasley4.jpg"]
+                     },
+                     {
+                        "answer":"slytherin",
+                        "imageList":["slytherin1.jpg","slytherin2.jpg","slytherin3.png","slytherin4.jpg"]
+
+                     },
+                    {
+                      "answer":"dementor",
+                      "imageList": ["dementor1.jpg","dementor2.jpg","dementor3.jpg","dementor4.png"]
+                    }
+                    
+            ]
+                  },
+
+  {
+            "name":"level2",
             "difficulty":2,
             "pool": [
                     {
                       "answer":"gringotts",
                      "imageList":["gringotts1.jpg","gringotts2.jpg","gringotts3.jpg","gringotts4.jpg"]
                      },
-                     {
-                        "answer":"hagrid",
-                        "imageList":["hagrid1.jpg","hagrid2.jpg","hagrid3.jpg","hagrid4.jpg"]
-
+                    {
+                      "answer":"ravenclaw",
+                     "imageList":["ravenclaw1.jpg","ravenclaw2.jpg","ravenclaw3.png","ravenclaw4.jpg"]
                      },
+                     
                       {
                         "answer":"horcrux",
                         "imageList": ["horcrux1.jpg","horcrux2.jpg","horcrux3.jpg","horcrux4.jpg"]
@@ -102,12 +91,13 @@
                   },
 
   {
-            "name":"level6",
+            "name":"level1",
             "difficulty":1,
             "pool": [
                     {
-                      "answer":"weasley",
-                     "imageList":["weasley1.jpg","weasley2.jpg","weasley3.png","weasley4.jpg"]
+                        "answer":"hagrid",
+                        "imageList":["hagrid1.jpg","hagrid2.jpg","hagrid3.jpg","hagrid4.jpg"]
+
                      },
                      {
                         "answer":"quidditch",
@@ -119,6 +109,5 @@
   ],
 "imageServer":"http://spriteserver.sanupindi.com:5000/getimage?"
 }
-
 
 

@@ -29,10 +29,12 @@ public class PrefrabSelectLevel : MonoBehaviour
     }
 
     private int unlock;
+    private string userPath;
     void Start()
     {
-        GetComponent<Renderer>().material.color = Color.black;
-        readUserJson("Assets/Resources/jsonData/user_info.json");
+        userPath = Application.persistentDataPath+"/user_info.json";
+        GetComponent<Renderer>().material.color = Color.yellow;
+        readUserJson();
     }
 
     // Update is called once per frame
@@ -40,15 +42,19 @@ public class PrefrabSelectLevel : MonoBehaviour
     {
         
     }
-    void readUserJson(string filePath){
-        StreamReader file = new StreamReader(filePath);
-        string line;
-        string contents="";
-        while((line = file.ReadLine())!=null){
-            contents+=line.Replace("\t","");
-        }
+    void readUserJson(){
 
-        User userobj = JsonUtility.FromJson<User>(contents);
+        StreamReader file = new StreamReader(userPath);
+        string line;
+        string usercontents = "";
+        while ((line = file.ReadLine()) != null)
+        {
+            usercontents += line.Replace("\t", "");
+        }
+        file.Close();
+
+        User userobj = JsonUtility.FromJson<User>(usercontents);
+
         foreach (Themeprogress thm in userobj.progress){
             if(thm.theme==StaticClass.ThemeSelection){ 
                 unlock=thm.unlocked;
@@ -64,7 +70,7 @@ public class PrefrabSelectLevel : MonoBehaviour
 
     }
     void OnMouseExit(){
-    	GetComponent<Renderer>().material.color = Color.black;
+    	GetComponent<Renderer>().material.color = Color.yellow;
     }
     void OnMouseDown(){
         var levelValue = int.Parse(GetComponent<TextMesh>().text.Split()[1]);

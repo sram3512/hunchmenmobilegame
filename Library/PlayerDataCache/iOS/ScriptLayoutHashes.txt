@@ -1,6 +1,6 @@
 iOS
 PlayerPath?
-/Users/sriramanupindi/Documents/USC Classes & Misc/CSCI-599/unity_learning_games/mobilegameproject/Builds/iOS
+/Users/sriramanupindi/Documents/USC Classes & Misc/CSCI-599/unity_learning_games/Builds/iOS
 SceneListBegin?
 Assets/Scenes/LoadScene.unity
 Assets/Scenes/LevelSelectionScene.unity
@@ -8,7 +8,7 @@ Assets/Scenes/GameScene.unity
 SceneListEnd?
 1f52f33adc3afc0a43d8ff1c645acfc5 Assembly-CSharp.dll:.KeyBoardRender
 3c08375166df118bd1801438fc36b92f Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
-5da3c781e80433215a250cc1b34a86fd Assembly-CSharp.dll:.ThemeRender
+cfda098fb9171b5e4631cec7000b3853 Assembly-CSharp.dll:.ThemeRender
 77c21079ace8d76ce6e941d3dabbfe6e Unity.TextMeshPro.dll:TMPro.TMP_Dropdown
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 06f0fef534ca4c1d6064fd77a26bf722 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -92,8 +92,10 @@ aa165095bcf0f4d99594ea33df01c81b UnityEngine.UI.dll:UnityEngine.UI.Slider
 0fd6822f6177297bd0eb4d83cc7a9030 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 64e54c0cbb0177c5ea26f340efb9ff85 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
+06aac89e8d0762d2468446b46ebf5ae3 Assembly-CSharp.dll:.RenderSpriteURL
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.MoveCamera
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.RemoveChar
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.FreezeTime
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 06f0fef534ca4c1d6064fd77a26bf722 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 780e8f682b3221346c034a6712a0fd25 UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -173,7 +175,7 @@ e1300922cc039f41ab46a47f4cb05898 Unity.TextMeshPro.dll:TMPro.TMP_Settings
 fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
-c58c571e3020363a440f769c8cd4b6d8 Assembly-CSharp.dll:.LevelSelectionScript
+672282ac05cc3eaed8afcf1f50336b49 Assembly-CSharp.dll:.LevelSelectionScript
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:TMPro.Examples.SimpleScript
 931f489e44eadf809e9310429c99dde5 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioListenerExtension
 fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
@@ -191,10 +193,11 @@ fe2d355deb0ca31d59a0a7cf4d141fc3 Assembly-CSharp.dll:TMPro.Examples.Benchmark04
 4d16cfbaa8e821a2b370e80844a0e9bc Assembly-CSharp.dll:TMPro.Examples.TextMeshSpawner
 e63944317d2f5958e31963668bb29158 Assembly-CSharp.dll:TMPro.Examples.VertexShakeB
 5bb0c23ac2810973880e592724a69354 Assembly-CSharp.dll:TMPro.Examples.Benchmark02
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.ReturntoTheme
 bd3f0ca738703903e759f77536ed74fd Assembly-CSharp.dll:TMPro.Examples.TMP_UiFrameRateCounter
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:TMPro.Examples.VertexColorCycler
 e63944317d2f5958e31963668bb29158 Assembly-CSharp.dll:TMPro.Examples.VertexZoom
-0cfed8888b0704fb1f14a87e3d5cb038 Assembly-CSharp.dll:.GameSceneRender
+26d6cc3016507b7ac250154fe66d8309 Assembly-CSharp.dll:.GameSceneRender
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 e80c1450883443c68d6c2dade213536f Assembly-CSharp.dll:TMPro.Examples.TMPro_InstructionOverlay
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:TMPro.Examples.TeleType
