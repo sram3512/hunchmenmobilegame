@@ -103,15 +103,15 @@ public class GameSceneRender : MonoBehaviour
 
     void Start()
     {
-        userPath = "Assets/Resources/jsonData/user_info.json";
-        //coinsTotal = 0;
+        userPath = Application.persistentDataPath+"/user_info.json";
+        
+  
         currentLevel = int.Parse(StaticClass.LevelSelection);
-        //coinVal = coins.GetComponent<TextMesh>();
+      
 
-        var coinsAmount = Instantiate(currencyDisplay, new Vector3(0.5f, 2.06f, -5f), Quaternion.identity);
+        var coinsAmount = Instantiate(currencyDisplay, new Vector3(-3.50f, 1.77f, -5.0f), Quaternion.identity);
         coinsAmount.GetComponent<Transform>().Rotate(new Vector3(0, 180, 0));
-        //coinsAmount.GetComponent<SpriteRenderer>().transform.position = new Vector3(3.63f, -0.44f, -4.86f);
-        //coinsAmount.GetComponent<TextMesh>().transform.position = new Vector3(1.9f, 2.06f, -5f);
+   
 
         var coinsText1 = GameObject.FindWithTag("currencyValue").GetComponent<TextMesh>();
         //coinVal = Instantiate(coins, new Vector3(0.55f, 2.06f, -5.0f), Quaternion.identity).GetComponent<TextMesh>();
@@ -120,14 +120,14 @@ public class GameSceneRender : MonoBehaviour
         freezeTimeObject = freezeTime.gameObject;
 
         User currencyObj = readUserinfo();
-        Debug.Log("CoinVal:" + currencyObj.currency.ToString());
+        
         //coinVal.text = currencyObj.currency.ToString();
         coinsText1.text = currencyObj.currency.ToString();
 
-        var levelIndicator = Instantiate(hud,new Vector3(0.88f,2.06f,-5.0f),Quaternion.identity);
+        var levelIndicator = Instantiate(hud,new Vector3(0.7f,2.06f,-5.0f),Quaternion.identity);
         var textmeshLevel = levelIndicator.GetComponent<TextMesh>();
 
-        timeDisplay = Instantiate(hud, new Vector3(-1.42f,2.06f,-5.0f),Quaternion.identity).GetComponent<TextMesh>();
+        timeDisplay = Instantiate(hud, new Vector3(-1.34f,2.06f,-5.0f),Quaternion.identity).GetComponent<TextMesh>();
         timeDisplay.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
 
         infoMessage = Instantiate(hud, new Vector3(-2.82f,0.06f,-5.0f),Quaternion.identity).GetComponent<TextMesh>();
@@ -152,7 +152,7 @@ public class GameSceneRender : MonoBehaviour
         textmeshLevel.text = "Level "+StaticClass.LevelSelection;
         textmeshLevel.color = Color.red;
 
-        levelTimer = 20;
+        levelTimer = 25;
         currencyTrigger = false;
 
         Debug.Log(StaticClass.LevelSelection);
@@ -160,7 +160,8 @@ public class GameSceneRender : MonoBehaviour
 
         themeInstance = readTheme(readUserinfo());
 
-        readJson("Assets/Resources/jsonData/"+StaticClass.ThemeSelection+".json");
+        readJson("jsonData/"+StaticClass.ThemeSelection);
+        
 
         keyBoardCreation();
         answerCreation();
@@ -275,7 +276,7 @@ public class GameSceneRender : MonoBehaviour
     Themeprogress Theme = null;
     for(int i=0;i<userObj.progress.Count;i++){
         if(userObj.progress[i].theme==StaticClass.ThemeSelection){
-            Debug.Log("Fount at:"+i.ToString());
+            Debug.Log("Found at:"+i.ToString());
             Theme=(Themeprogress)userObj.progress[i];
         }
     }
@@ -317,14 +318,9 @@ public class GameSceneRender : MonoBehaviour
    }
    
    void readJson(string filePath){
-        StreamReader file = new StreamReader(filePath);
-        string line;
-        string contents="";
-        while((line = file.ReadLine())!=null){
-            contents+=line.Replace("\t","");
-        }
-        
-        themeObject= JsonUtility.FromJson<Theme>(contents);
+
+        var jsonTextFile = Resources.Load<TextAsset>(filePath);
+        themeObject = JsonUtility.FromJson<Theme>(jsonTextFile.ToString());
       
         imageserverURL = themeObject.imageServer;
         
@@ -358,6 +354,7 @@ public class GameSceneRender : MonoBehaviour
             for(int i=0;i<poolSize;i++){
                 tmp.Add(i);
             }
+            Debug.Log("poolsize"+poolSize.ToString());
         
             for(int i=0;i<themeInstance.previousQuestion.Count;i++){
                 if(themeInstance.previousQuestion[i].level==currentLevel){
@@ -386,20 +383,22 @@ public class GameSceneRender : MonoBehaviour
     }
 
     void writeUserinfo(User userobj){
+        
         StreamWriter writer = new StreamWriter(userPath);
         writer.WriteLine(JsonUtility.ToJson(userobj));
         writer.Close();
     }
     User readUserinfo(){
+
         StreamReader file = new StreamReader(userPath);
         string line;
-        string usercontents="";
+        string contents="";
         while((line = file.ReadLine())!=null){
-            usercontents+=line.Replace("\t","");
+            contents+=line.Replace("\t","");
         }
         file.Close();
-
-        return JsonUtility.FromJson<User>(usercontents);
+        
+        return JsonUtility.FromJson<User>(contents);
 
     }
     IEnumerator fetchImages(){
@@ -491,7 +490,6 @@ public class GameSceneRender : MonoBehaviour
         //Update the coinValue
         var coinsText1 = GameObject.FindWithTag("currencyValue").GetComponent<TextMesh>();
         User currencyObj = readUserinfo();
-        Debug.Log("CoinVal:" + currencyObj.currency.ToString());
         //coinVal.text = currencyObj.currency.ToString();
         coinsText1.text = currencyObj.currency.ToString();
 

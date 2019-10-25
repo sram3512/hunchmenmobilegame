@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEditor;
 
 public class FreezeTime : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private static readonly string USER_PATH = "Assets/Resources/jsonData/user_info.json";
+    private string userPath;
 
     [System.Serializable]
     private class User
@@ -37,6 +38,7 @@ public class FreezeTime : MonoBehaviour
 
     void Start()
     {
+        userPath = Application.persistentDataPath+"/user_info.json";
         GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("timefreeze");
         GetComponent<Transform>().Rotate(new Vector3(0, 180, 0));
         GetComponent<Transform>().localScale = new Vector3(0.7f, 0.7f, 1);
@@ -63,7 +65,7 @@ public class FreezeTime : MonoBehaviour
 
     User readUserinfo()
     {
-        StreamReader file = new StreamReader(USER_PATH);
+        StreamReader file = new StreamReader(userPath);
         string line;
         string usercontents = "";
         while ((line = file.ReadLine()) != null)
@@ -77,7 +79,7 @@ public class FreezeTime : MonoBehaviour
 
     void writeUserinfo(User userobj)
     {
-        StreamWriter writer = new StreamWriter(USER_PATH);
+        StreamWriter writer = new StreamWriter(userPath);
         writer.WriteLine(JsonUtility.ToJson(userobj));
         writer.Close();
     }

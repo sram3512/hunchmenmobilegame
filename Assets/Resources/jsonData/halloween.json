@@ -1,0 +1,34 @@
+{
+"levels":[
+  {
+            "name":"level1",
+            "difficulty":1,
+            "pool": [{"answer":"scream",
+                     "imageList":["scream1.jpg","scream2.jpg","scream3.jpg","scream4.png"]
+                     },
+                     {
+                        "answer":"casper",
+                        "imageList":["casper1.png","casper2.png","casper3.PNG","casper4.png"]
+
+                     }
+            ]
+                  },
+    {
+            "name":"level2",
+            "difficulty":2,
+            "pool": [
+                      {
+                        "answer":"hocus",
+                        "imageList": ["hocuspocus1.jpg","hocuspocus2.jpg","hocuspocus3.jpg","hocuspocus4.jpg"]
+                      },
+                      {
+                        "answer":"zombie",
+                        "imageList":["zombie1.jpg","zombie2.jpg","zombie3.jpg","zombie4.png"]
+
+                     }
+            ]
+                  }
+    
+        ],
+"imageServer":"http://spriteserver.sanupindi.com:5000/getimage?"
+}
