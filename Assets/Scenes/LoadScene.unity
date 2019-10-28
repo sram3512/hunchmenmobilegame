@@ -419,6 +419,7 @@ MonoBehaviour:
     type: 3}
   currencyDisplay: {fileID: 3414506188881721824, guid: 86535fe635a354022ad8ecae0f67a512,
     type: 3}
+  money: {fileID: 5161253669318332249, guid: 193a95f4405874b2cb69df222a4b33fe, type: 3}
 --- !u!4 &1939485401
 Transform:
   m_ObjectHideFlags: 0
