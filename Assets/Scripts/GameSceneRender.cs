@@ -294,12 +294,12 @@ public class GameSceneRender : MonoBehaviour
    void computeReward(){
 
         currencyTrigger = true;
-        int maxCurrency = 20;
+        int maxCurrency = 200;
         if(levelTimer<15){
-            maxCurrency=15;
+            maxCurrency=50;
         }
         if(levelTimer<10){
-            maxCurrency=10;
+            maxCurrency=20;
         }
         if(levelTimer<5){
             maxCurrency=5;
@@ -324,12 +324,20 @@ public class GameSceneRender : MonoBehaviour
       
         imageserverURL = themeObject.imageServer;
         
-        int gameLevel = int.Parse(StaticClass.LevelSelection)-1;
+        int gameLevel =-1; 
+        for(int i=0;i<themeObject.levels.Count;i++){
+            if(themeObject.levels[i].name=="level"+StaticClass.LevelSelection){
+                gameLevel=i;
+            }
+        }
+        
 
         try{
 
+           
             int poolSelection = randomQuestionWithTracking(themeObject.levels[gameLevel].pool.Count); 
         
+            
             Answer = themeObject.levels[gameLevel].pool[poolSelection].answer;
             Questions = themeObject.levels[gameLevel].pool[poolSelection].imageList;
         }
@@ -357,7 +365,9 @@ public class GameSceneRender : MonoBehaviour
             Debug.Log("poolsize"+poolSize.ToString());
         
             for(int i=0;i<themeInstance.previousQuestion.Count;i++){
+                Debug.Log("entered");
                 if(themeInstance.previousQuestion[i].level==currentLevel){
+                    Debug.Log("entered");   
                     found = true;
                     int prevQ = themeInstance.previousQuestion[i].question;
                         
@@ -369,6 +379,7 @@ public class GameSceneRender : MonoBehaviour
                    
             }
             if(!found){
+                Debug.Log("entered");
                 pos = shuffleInt(tmp.ToArray())[0];
                 Questionpool qp = new Questionpool();
                 qp.level=currentLevel;
@@ -411,7 +422,8 @@ public class GameSceneRender : MonoBehaviour
             yield return spriteURL;
 
             try{
-                questionSprites[i] = Sprite.Create(spriteURL.texture,new Rect(0, 0, spriteURL.texture.width, spriteURL.texture.height), new Vector2(0, 0));
+                //
+                questionSprites[i] = Sprite.Create(spriteURL.texture,new Rect(0, 0, spriteURL.texture.width,spriteURL.texture.height), new Vector2(0, 0));
             }
             catch(System.NullReferenceException e){
                 infoMessage.text = "Is the\nserver up?";

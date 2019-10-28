@@ -4,27 +4,30 @@
 {
             "name":"level1",
             "difficulty":1,
-            "pool": [{"answer":"batman",
-                     "imageList":["batman1.jpg","batman2.jpg","batman3.jpg","batman4.jpg"]
+            "pool": [
+                     {
+                        "answer":"batman",
+                        "imageList":["batman1.jpg","batman3.jpg","batman2.jpg","batman4.jpg"]
                      },
-
-                      {
-                        "answer":"tangled",
-                        "imageList": ["tangled1.png","tangled2.jpg","tangled3.jpg","tangled4.jpg"]
-                      }
+                     {
+                        "answer":"titanic",
+                        "imageList":["titanic1.jpg","titanic3.jpg","titanic2.jpeg","titanic4.jpg"]
+                     }
     ]
 		  },
 
   {
             "name":"level2",
             "difficulty":2,
-            "pool": [{"answer":"coco",
-                     "imageList":["coco1.jpg","coco2.jpg","coco3.jpg","coco4.jpg"]
+            "pool": [
+                     {
+                        "answer":"thor",
+                        "imageList": ["thor2.jpg","thor3.jpg","thor4.jpg","thor1.jpeg"]
                      },
-                      {
-                        "answer": "jumanji",
-                        "imageList": ["jumanji1.jpg", "jumanji2.png", "jumanji3.jpg", "jumanji4.jp"]
-                      }
+                     {
+                        "answer": "moana",
+                        "imageList": ["moana1.jpg","moana2.jpg","moana3.png","moana4.jpg"]
+                     }
             ]
                   },
 
@@ -33,41 +36,36 @@
             "difficulty":3,
             "pool": [
                      {
+                        "answer":"tangled",
+                        "imageList": ["tangled1.png","tangled4.jpg","tangled3.jpg","tangled2.jpg"]
+                     },
+                     {
                         "answer":"scarface",
                         "imageList":["scarface1.jpg","scarface2.jpg","scarface3.jpg","scarface4.jpg"]
-
                      },
-                      {
-                        "answer": "moana",
-                        "imageList": ["moana1.jpg","moana2.jpg","moana3.png","moana4.jpg"]
-                      }
+                     {
+                        "answer": "jumanji",
+                        "imageList": ["jumanji1.jpg", "jumanji2.png", "jumanji3.jpg", "jumanji4.jpg"]
+                     }
+                      
             ]
                   },
 
-  
-{
+  {
             "name":"level4",
             "difficulty":3,
-            "pool": [{"answer":"rocky",
-                     "imageList":["rocky1.jpg","rocky2.jpg","rocky3.jpg","rocky4.jpg"]
+            "pool": [
+                     {
+                        "answer":"rocky",
+                        "imageList":["rocky2.jpg","rocky3.jpg","rocky4.jpg","rocky1.jpg"]
                      },
-                      {
-                        "answer": "deadpool",
-                        "imageList": ["deadpool1.png","deadpool2.jpg","deadpool3.jpg","deadpool4.jpg"]
-                      }
-            ]
-                  },
-{
-            "name":"level5",
-            "difficulty":3,
-            "pool": [{
+                     {
                         "answer":"twilight",
-                        "imageList": ["twilight1.jpeg","twilight2.jpg","twilight3.jpg","twilight4.jpg"]
-                      },
-                      {
-                        "answer":"thor",
-                        "imageList":["thor1.jpeg","thor2.jpg","thor3.jpg","thor4.jpg"]
-
+                        "imageList":["twilight1.jpeg","twilight2.jpg","twilight3.jpg","twilight4.jpg"]
+                     },
+                     {
+                        "answer": "deadpool",
+                        "imageList": ["deadpool2.jpg","deadpool1.png","deadpool3.jpg","deadpool4.jpg"]
                      }
             ]
                   }

@@ -3,32 +3,36 @@
   {
             "name":"level1",
             "difficulty":1,
-            "pool": [{"answer":"scream",
-                     "imageList":["scream1.jpg","scream2.jpg","scream3.jpg","scream4.png"]
+            "pool": [
+                     {
+                        "answer":"coco",
+                        "imageList":["coco1.jpg","coco2.jpg","coco3.JPG","coco4.jpg"]
                      },
                      {
-                        "answer":"casper",
-                        "imageList":["casper1.png","casper2.png","casper3.PNG","casper4.png"]
-
+                        "answer":"zombie",
+                        "imageList":["zombie2.jpg","zombie4.png","zombie1.jpg","zombie3.jpg"]
                      }
+                     
             ]
                   },
     {
             "name":"level2",
-            "difficulty":2,
+            "difficulty":1,
             "pool": [
-                      {
-                        "answer":"hocus",
-                        "imageList": ["hocuspocus1.jpg","hocuspocus2.jpg","hocuspocus3.jpg","hocuspocus4.jpg"]
-                      },
-                      {
-                        "answer":"zombie",
-                        "imageList":["zombie1.jpg","zombie2.jpg","zombie3.jpg","zombie4.png"]
-
+                     {
+                        "answer":"scream",
+                        "imageList":["scream2.jpg","scream4.png","scream3.jpg","scream1.jpg"]
+                     },
+                     {
+                        "answer":"casper",
+                        "imageList":["casper2.png","casper3.PNG","casper4.jpg","casper1.png"]
+                     },
+                     {
+                        "answer":"witch",
+                        "imageList":["witches1.jpg", "witches2.jpg", "witches3.jpeg", "witches4.jpeg"]
                      }
             ]
                   }
-    
         ],
 "imageServer":"http://spriteserver.sanupindi.com:5000/getimage?"
 }
