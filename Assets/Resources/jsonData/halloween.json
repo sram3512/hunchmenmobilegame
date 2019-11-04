@@ -1,36 +1,34 @@
+
 {
 "levels":[
   {
             "name":"level1",
             "difficulty":1,
-            "pool": [
-                     {
-                        "answer":"coco",
-                        "imageList":["coco1.jpg","coco2.jpg","coco3.JPG","coco4.jpg"]
-                     },
-                     {
-                        "answer":"zombie",
-                        "imageList":["zombie2.jpg","zombie4.png","zombie1.jpg","zombie3.jpg"]
-                     }
-                     
-            ]
-                  },
-    {
-            "name":"level2",
-            "difficulty":1,
-            "pool": [
-                     {
-                        "answer":"scream",
-                        "imageList":["scream2.jpg","scream4.png","scream3.jpg","scream1.jpg"]
+            "pool": [{"answer":"scream",
+                     "imageList":["scream1.jpg","scream2.jpg","scream3.jpg","scream4.jpg"]
                      },
                      {
                         "answer":"casper",
-                        "imageList":["casper2.png","casper3.PNG","casper4.jpg","casper1.png"]
-                     },
-                     {
-                        "answer":"witch",
-                        "imageList":["witches1.jpg", "witches2.jpg", "witches3.jpeg", "witches4.jpeg"]
+                        "imageList":["casper1.jpg","casper2.jpeg","casper3.jpg","casper4.jpg"]
+
                      }
+            ]
+                  },
+  {
+            "name":"level2",
+            "difficulty":2,
+            "pool": [
+                     {
+                        "answer":"zombie",
+                        "imageList":["zombie1.jpg","zombie2.jpg","zombie3.jpg","zombie4.jpg"]
+
+                     },
+              {
+                        "answer":"witches",
+                        "imageList":["witches1.jpg","witches2.jpeg","witches3.jpg","witches4.jpeg"]
+
+                     }
+
             ]
                   }
         ],

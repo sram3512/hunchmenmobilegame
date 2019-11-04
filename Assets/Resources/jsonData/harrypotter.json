@@ -1,108 +1,123 @@
+
 {
 "levels":[
 
 {
-            "name":"level4",
+            "name":"level1",
+            "difficulty":3,
+            "pool": [
+                    {
+                      "answer":"basilisk",
+                     "imageList":["basilisk1.jpg","basilisk2.jpg","basilisk3.jpg","basilisk4.jpg"]
+                     },
+
+                    {
+                      "answer":"dementor",
+                      "imageList": ["dementor1.jpeg","dementor2.jpg","dementor3.jpg","dementor4.jpg"]
+                    }
+            ]
+                  },
+
+  {
+            "name":"level2",
             "difficulty":2,
             "pool": [
-                     {
-                        "answer":"basilisk",
-                        "imageList":["basilisk4.jpg","basilisk3.jpg","basilisk1.jpg","basilisk2.jpg"]
-                     },
-                     {
-                        "answer":"fluffy",
-                        "imageList": ["fluffy1.jpg","fluffy2.jpg","fluffy3.jpg","fluffy4.jpg"]
-                     }
-                    
-            ]
-                  },
-
-  {
-            "name":"level6",
-            "difficulty":3,
-            "pool": [
-                     {
-                        "answer":"hogsmeade",
-                        "imageList":["hogsmeade2.jpg","hogsmeade4.jpg","hogsmeade3.jpg","hogsmeade1.jpg"]
-
-                     },
-                     {
-                        "answer":"petrify",
-                        "imageList":["petrify1.jpg","petrify2.jpg","petrify3.jpg","petrify4.jpg"]
-                     }
-                    
-            ]
-                  },
-
-  {
-            "name":"level5",
-            "difficulty":3,
-            "pool": [
-                    
                     {
-                      "answer":"aurors",
-                      "imageList": ["aurors1.jpg","aurors2.jpg","aurors3.jpg","aurors4.jpg"]
-                    },
+                      "answer":"petrify",
+                     "imageList":["petrify1.jpg","petrify2.jpg","petrify3.jpg","petrify4.jpg"]
+                     },
+
                     {
-                      "answer":"animagus",
-                      "imageList": ["animagus1.jpg","animagus4.jpg","animagus2.jpg","animagus3.jpg"]
+                      "answer":"fluffy",
+                      "imageList": ["fluffy1.jpg","fluffy2.jpg","fluffy3.jpg","fluffy4.jpg"]
                     }
             ]
                   },
 
   {
             "name":"level3",
+            "difficulty":1,
+            "pool": [
+
+                     {
+                        "answer":"slytherin",
+                        "imageList":["slytherin1.jpg","slytherin2.jpg","slytherin3.png","slytherin4.png"]
+
+                     },
+                    {
+                      "answer":"aurors",
+                      "imageList": ["aurors1.jpg","aurors2.jpg","aurors3.jpg","aurors4.jpg"]
+                    }
+            ]
+                  },
+
+  {
+            "name":"level4",
             "difficulty":2,
             "pool": [
                     {
-                        "answer":"dementor",
-                        "imageList": ["dementor1.jpg","dementor2.jpg","dementor3.jpg","dementor4.png"]
-                    },
+                      "answer":"ravenclaw",
+                     "imageList":["ravenclaw1.jpg","ravenclaw2.jpg","ravenclaw3.png","ravenclaw4.jpg"]
+                     },
+
                     {
-                        "answer":"horcrux",
-                        "imageList": ["horcrux2.jpg","horcrux1.jpg","horcrux3.jpg","hocrux4.jpg"]
+                      "answer":"animagus",
+                      "imageList": ["animagus1.jpg","animagus2.jpg","animagus3.jpg","animagus4.jpg"]
                     }
-                    
             ]
                   },
 
   {
-            "name":"level2",
-            "difficulty":1,
+            "name":"level5",
+            "difficulty":2,
             "pool": [
+
                      {
                         "answer":"hagrid",
                         "imageList":["hagrid1.jpg","hagrid2.jpg","hagrid3.jpg","hagrid4.jpg"]
-                     },
-                     {
-                        "answer":"ravenclaw",
-                        "imageList":["ravenclaw1.jpg","ravenclaw4.jpg","ravenclaw2.jpg","ravenclaw3.png"]
-                     },
-                     {
-                        "answer":"slytherin",
-                        "imageList":["slytherin4.JPG","slytherin2.jpg","slytherin1.jpg","slytherin3.png"]
 
-                     }
-                      
+                     },
+                      {
+                        "answer":"horcrux",
+                        "imageList": ["horcrux1.jpg","horcrux2.png","horcrux3.jpg","horcrux4.png"]
+                      }
             ]
                   },
 
   {
-            "name":"level1",
+            "name":"level6",
             "difficulty":1,
             "pool": [
-                     {
-                        "answer":"gringotts",
-                        "imageList":["gringotts2.jpg","gringotts1.jpg","gringotts3.jpg","gringotts4.jpg"]
+                    {
+                      "answer":"weasley",
+                     "imageList":["weasley1.jpg","weasley2.jpg","weasley3.jpeg","weasley4.jpg"]
                      },
                      {
                         "answer":"quidditch",
-                        "imageList":["quidditch1.png","quidditch2.jpg","quidditch3.jpg","quidditch4.jpg"]
+                        "imageList":["quidditch1.jpg","quidditch2.jpg","quidditch3.jpg","quidditch4.jpeg"]
+
+                     }
+            ]
+                  },
+  {
+            "name":"level7",
+            "difficulty":3,
+            "pool": [
+
+                     {
+                        "answer":"hogsmeade",
+                        "imageList":["hogsmeade1.png","hogsmeade2.jpg","hogsmeade3.jpg","hogsmeade4.jpg"]
+
+                     },
+                    {
+                      "answer":"gringotts",
+                     "imageList":["gringotts1.jpg","gringotts2.jpg","gringotts3.jpg","gringotts4.jpg"]
                      }
             ]
                   }
-  ],
+],
 "imageServer":"http://spriteserver.sanupindi.com:5000/getimage?"
 }
+
 
 
