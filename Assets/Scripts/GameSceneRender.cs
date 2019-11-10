@@ -17,6 +17,9 @@ public class GameSceneRender : MonoBehaviour
     public GameObject freezeTime;
     public GameObject currencyDisplay;
     private GameObject freezeTimeObject;
+    public GameObject removeKey;
+    public GameObject tokenHint;
+    public GameObject dTimer;
 
 
 
@@ -30,6 +33,7 @@ public class GameSceneRender : MonoBehaviour
     private StreamWriter output;
     private Level lvs;
     private float levelTimer;
+    private float fixedTimer;
 
     private TextMesh timeDisplay;
     private TextMesh numChars;
@@ -39,6 +43,7 @@ public class GameSceneRender : MonoBehaviour
     private TextMesh coinsText;
 
     private SpriteRenderer[] blankSprites;
+    private List<GameObject> dynamicTimer;
     private char[] alphabet = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O',
                                 'P','Q','R','S','T','U','V','W','X','Y','Z'};
 
@@ -53,8 +58,8 @@ public class GameSceneRender : MonoBehaviour
     [System.Serializable]
     private class Level{
         public string name;
-        public int difficulty;
-        public List<QAPoll> pool;
+        public string description;
+        public List<QAPoll> questions;
     }
     
     [System.Serializable]
@@ -84,7 +89,8 @@ public class GameSceneRender : MonoBehaviour
     [System.Serializable]
     private class Questionpool{
         public int level;
-        public int question;
+        public int passed;
+        public List<int> question;
     }
 
 
@@ -99,14 +105,43 @@ public class GameSceneRender : MonoBehaviour
     private int currentLevel;
     private Themeprogress themeInstance;
     public static int coinsTotal;
+    private List<Object> ansPos;
 
+    private bool remove;
+    private Dictionary<string,int> levelMap;
+
+    private float xs;
+    private float ys;
+    private float zs;
+    private bool revt;
+    private float diff;
+    private Dictionary<SpriteRenderer,bool> expandTrack;
 
     void Start()
     {
+
+        //Dynamic Timer 
+        dynamicTimer = new List<GameObject>();
+
+
+        //Image Expansion parameters
+        expandTrack = new Dictionary<SpriteRenderer,bool>();
+        xs=0.5f;
+        ys=0.5f;
+        zs=0.5f;
+        revt=false;
+        diff=0.001f;
+
+        levelMap = new Dictionary<string,int>();
+        levelMap.Add("EASY",0);
+        levelMap.Add("MEDIUM",1);
+        levelMap.Add("HARD",2);
+
+    	ansPos = new List<Object>();
         userPath = Application.persistentDataPath+"/user_info.json";
         
   
-        currentLevel = int.Parse(StaticClass.LevelSelection);
+        currentLevel = levelMap[StaticClass.LevelSelection];
       
 
         var coinsAmount = Instantiate(currencyDisplay, new Vector3(-3.50f, 1.77f, -5.0f), Quaternion.identity);
@@ -116,8 +151,18 @@ public class GameSceneRender : MonoBehaviour
         var coinsText1 = GameObject.FindWithTag("currencyValue").GetComponent<TextMesh>();
         //coinVal = Instantiate(coins, new Vector3(0.55f, 2.06f, -5.0f), Quaternion.identity).GetComponent<TextMesh>();
 
-        Instantiate(freezeTime, new Vector3(2.2f, 1.7f, -5.0f), Quaternion.identity);
+        Instantiate(freezeTime, new Vector3(2.2f, 0.91f, -5.0f), Quaternion.identity);
         freezeTimeObject = freezeTime.gameObject;
+
+        var rmObj = Instantiate(removeKey, new Vector3(2.20f,-0.11f,-5.0f),Quaternion.identity);
+
+        rmObj.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
+        rmObj.GetComponent<Transform>().localScale = new Vector3(0.5f,0.5f,0.5f);
+
+        var tokObj = Instantiate(tokenHint, new Vector3(2.20f,-1.14f,-5.0f),Quaternion.identity);
+        tokObj.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
+        tokObj.GetComponent<Transform>().localScale = new Vector3(0.5f,0.5f,0.5f);
+
 
         User currencyObj = readUserinfo();
         
@@ -130,7 +175,7 @@ public class GameSceneRender : MonoBehaviour
         timeDisplay = Instantiate(hud, new Vector3(-1.34f,2.06f,-5.0f),Quaternion.identity).GetComponent<TextMesh>();
         timeDisplay.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
 
-        infoMessage = Instantiate(hud, new Vector3(-2.82f,0.06f,-5.0f),Quaternion.identity).GetComponent<TextMesh>();
+        infoMessage = Instantiate(hud, new Vector3(-0.82f,0.3f,-5.0f),Quaternion.identity).GetComponent<TextMesh>();
         infoMessage.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
 
 
@@ -149,12 +194,14 @@ public class GameSceneRender : MonoBehaviour
         image4.GetComponent<Transform>().localScale = new Vector3(0.5f,0.5f,0.5f);
 
         
-        textmeshLevel.text = "Level "+StaticClass.LevelSelection;
+        textmeshLevel.text = StaticClass.LevelSelection;
         textmeshLevel.color = Color.red;
 
         levelTimer = 25;
+        fixedTimer = 25;
         currencyTrigger = false;
 
+        remove = false;
         Debug.Log(StaticClass.LevelSelection);
         Debug.Log(StaticClass.ThemeSelection);
 
@@ -168,7 +215,56 @@ public class GameSceneRender : MonoBehaviour
 
        StartCoroutine(fetchImages());
 
+        createTimer();
 
+
+    }
+    void createTimer(){
+        //dynamicTimer = new GameObject[40];
+        var dx=-1.6f;
+        var dy=-1.65f;
+        var dz=-5.0f;
+        for(int i=0;i<40;i++){
+            var tmpDyno = Instantiate(dTimer, new Vector3(dx,dy,dz),Quaternion.identity);
+            tmpDyno.GetComponent<SpriteRenderer>().color=Color.green;
+            dynamicTimer.Add(tmpDyno);
+            if(i<4){
+                dx-=0.3f;
+                tmpDyno.GetComponent<SpriteRenderer>().color=Color.green;
+            }
+            if(i==4){
+                dy+=0.4f;
+                tmpDyno.GetComponent<SpriteRenderer>().color=Color.green;
+            }
+            if(i>4 && i<14){
+                tmpDyno.GetComponent<Transform>().Rotate(new Vector3(0,0,90));
+                tmpDyno.GetComponent<SpriteRenderer>().color=Color.green;
+                dy+=0.3f;
+            }
+            if(i>=14 && i<27){
+                dx+=0.3f;
+                tmpDyno.GetComponent<SpriteRenderer>().color=Color.yellow;
+            }
+            if(i==27){
+                dy-=0.32f;
+                tmpDyno.GetComponent<SpriteRenderer>().color=Color.yellow;
+            }
+            if(i>27 && i<37){
+                tmpDyno.GetComponent<Transform>().Rotate(new Vector3(0,0,90));
+                tmpDyno.GetComponent<SpriteRenderer>().color=Color.red;
+                dy-=0.3f;
+            }
+            if(i==37){
+                tmpDyno.GetComponent<SpriteRenderer>().color=Color.red;
+            }
+            if(i>37){
+                dx-=0.3f;
+                tmpDyno.GetComponent<SpriteRenderer>().color=Color.red;
+            }
+            
+        }
+        //-2.9
+        
     }
     char[] shuffle(char[] keyboard){
         for (int k=0;k<keyboard.Length;k++){
@@ -181,10 +277,11 @@ public class GameSceneRender : MonoBehaviour
     }
     int[] shuffleInt(int[] data){
         for (int k=0;k<data.Length;k++){
-                int tmp = data[k];
+                int tp = data[k];
                 int pos = Random.Range(0,data.Length-1);
+
                 data[k]=data[pos];
-                data[pos]=tmp;
+                data[pos]=tp;
         }
         return data;
     }
@@ -208,8 +305,10 @@ public class GameSceneRender : MonoBehaviour
     void keyBoardCreation(){
         //string [] KeyBoard = new string[] {"A","B","C","D","E","F","G","H","I","J"};
         char[] KeyBoard = genCharSet(Answer);
-        float x=2.75f;
-        float y=0.0f;
+        //float x=2.75f;
+        //float y=0.0f;
+        float x =-3.48f;
+        float y =0.96f;
         for (int i=0;i<12;i++){
             
             var temp = Instantiate(picCharacter, new Vector3(x,y,-5.0f), Quaternion.identity);
@@ -217,23 +316,30 @@ public class GameSceneRender : MonoBehaviour
             temp.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(KeyBoard[i].ToString());
             temp.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
             if (i==2 || i==5 || i==8 || i==12){
-                x=2.75f;
+                //x=2.75f;
+                //y-=0.5f;
+                x =-3.48f;
                 y-=0.5f;
             }
             else{
                 x-=0.5f;
             }
+         	//Track AnswerLocation
+
+         	if(!Answer.ToUpper().Contains(temp.name)){
+         		ansPos.Add(temp);
+         	}   
         }
     }
     void answerCreation(){
 
-        float bx=0.0f;
+        float bx=-0.5f;
         float by=-1.92f;
         blankSprites = new SpriteRenderer[Answer.Length];
       
         for(int i=0;i<Answer.Length;i++){
             var blk = Instantiate(blankCharacter, new Vector3(bx,by,-5.0f), Quaternion.identity);
-            blk.name = "Blank";
+            blk.name="Blank";
             blankSprites[i] = blk.GetComponent<SpriteRenderer>();
             blankSprites[i].GetComponent<Transform>().Rotate(new Vector3(0,180,0));
             bx-=0.5f;
@@ -241,7 +347,7 @@ public class GameSceneRender : MonoBehaviour
     }
     void SubmitAnswerAction(string answer)
    {
-   	if (string.Compare(answer,Answer.ToUpper())==0){
+   	if (string.Compare(answer.ToUpper(),Answer.ToUpper())==0){
      	
    		
       	infoMessage.text = "Correct";
@@ -250,8 +356,14 @@ public class GameSceneRender : MonoBehaviour
         if (currencyTrigger==false){
             computeReward();
         }
-        
-        StartCoroutine(ChangeScene());
+        resetSinks();
+        if(themeInstance.previousQuestion[currentLevel].passed<themeInstance.previousQuestion[currentLevel].question.Count){
+             StartCoroutine(NextQuestionScene());
+        }
+        else{
+            StartCoroutine(ChangeScene());
+        }
+       
    	}
    }
 
@@ -276,7 +388,6 @@ public class GameSceneRender : MonoBehaviour
     Themeprogress Theme = null;
     for(int i=0;i<userObj.progress.Count;i++){
         if(userObj.progress[i].theme==StaticClass.ThemeSelection){
-            Debug.Log("Found at:"+i.ToString());
             Theme=(Themeprogress)userObj.progress[i];
         }
     }
@@ -307,10 +418,10 @@ public class GameSceneRender : MonoBehaviour
         User currencyObj = readUserinfo();
         currencyObj.currency += maxCurrency;
         //Unlock next level
-        
         Themeprogress thm = readTheme(currencyObj);
-        if(thm.unlocked==currentLevel && thm.unlocked+1<StaticClass.MaxLevels){
-            Debug.Log("valid");
+        thm.previousQuestion[currentLevel].passed+=1;
+
+        if(thm.previousQuestion[currentLevel].passed>=5 && thm.unlocked==currentLevel && thm.unlocked+1<StaticClass.MaxLevels){
             thm.unlocked += 1;
             
         }
@@ -326,7 +437,7 @@ public class GameSceneRender : MonoBehaviour
         
         int gameLevel =-1; 
         for(int i=0;i<themeObject.levels.Count;i++){
-            if(themeObject.levels[i].name=="level"+StaticClass.LevelSelection){
+            if(themeObject.levels[i].name=="level"+currentLevel.ToString()){
                 gameLevel=i;
             }
         }
@@ -335,11 +446,11 @@ public class GameSceneRender : MonoBehaviour
         try{
 
            
-            int poolSelection = randomQuestionWithTracking(themeObject.levels[gameLevel].pool.Count); 
+            int poolSelection = randomQuestionWithTracking(themeObject.levels[gameLevel].questions.Count); 
         
-            
-            Answer = themeObject.levels[gameLevel].pool[poolSelection].answer;
-            Questions = themeObject.levels[gameLevel].pool[poolSelection].imageList;
+            //int poolSelection=0;
+            Answer = themeObject.levels[gameLevel].questions[poolSelection].answer;
+            Questions = themeObject.levels[gameLevel].questions[poolSelection].imageList;
         }
         catch (System.ArgumentOutOfRangeException e){
              infoMessage.text = "Missing\nQuestions.";
@@ -352,38 +463,51 @@ public class GameSceneRender : MonoBehaviour
     int randomQuestionWithTracking(int poolSize){
 
 
-        Debug.Log(poolSize);     
+           
 
             int pos = -1;
             bool found = false;
-            Debug.Log("Pos:"+pos.ToString());
+            
 
             List<int> tmp = new List<int>();
             for(int i=0;i<poolSize;i++){
                 tmp.Add(i);
             }
-            Debug.Log("poolsize"+poolSize.ToString());
-        
-            for(int i=0;i<themeInstance.previousQuestion.Count;i++){
-                Debug.Log("entered");
-                if(themeInstance.previousQuestion[i].level==currentLevel){
-                    Debug.Log("entered");   
-                    found = true;
-                    int prevQ = themeInstance.previousQuestion[i].question;
-                        
-                    tmp.RemoveAt(prevQ);
-                    pos = shuffleInt(tmp.ToArray())[0];
 
-                    themeInstance.previousQuestion[i].question=pos;
+          
+        
+            for(int i=0;i<themeInstance.previousQuestion.Count;i++)
+            {
+                
+                if(themeInstance.previousQuestion[i].level==currentLevel)
+                {
+                   
+                    if(themeInstance.previousQuestion[i].question.Count!=poolSize){
+                        found = true;
+                        for(int k=0;k<themeInstance.previousQuestion[i].question.Count;k++){
+                            tmp.Remove(themeInstance.previousQuestion[i].question[k]);
+                        }
+                       
+                        if(tmp.Count>1){
+                            pos=shuffleInt(tmp.ToArray())[0];
+                        }
+                        else{
+                            pos=tmp[0];
+                        }
+                        themeInstance.previousQuestion[i].question.Add(pos);
+                        
                     }
+                }
                    
             }
-            if(!found){
-                Debug.Log("entered");
-                pos = shuffleInt(tmp.ToArray())[0];
+            if(!found)
+            {
+                
+                pos = Random.Range(0,poolSize-1);
                 Questionpool qp = new Questionpool();
                 qp.level=currentLevel;
-                qp.question=pos;
+                qp.question = new List<int>();
+                qp.question.Add(pos);
 
                 themeInstance.previousQuestion.Add(qp);
             }
@@ -412,6 +536,10 @@ public class GameSceneRender : MonoBehaviour
         return JsonUtility.FromJson<User>(contents);
 
     }
+    void resetSinks(){
+        StaticClass.freezeTimeEnabled=false;
+
+    }
     IEnumerator fetchImages(){
         Debug.Log("Fetching images");
 
@@ -433,9 +561,51 @@ public class GameSceneRender : MonoBehaviour
         }
 
     }
+    void expandImageFrame(SpriteRenderer IMAGE){
+
+        if(expandTrack.ContainsKey(IMAGE)){
+
+            if (expandTrack[IMAGE]){
+              
+                IMAGE.GetComponent<Transform>().localScale = new Vector3(xs,ys,zs);
+                if(xs<0.75f && !revt){
+                    xs+=diff;
+                    ys+=diff;
+                    zs+=diff;
+                }
+                else{
+                    revt=true;
+                }
+                   
+                if(revt && xs>0.49f){
+                    xs-=diff;
+                    ys-=diff;
+                    zs-=diff;
+                }
+
+                if(revt && xs<=0.49){
+                    revt=false;
+                    expandTrack[IMAGE]=false;
+                }
+
+            }
+        }
+        else{
+            expandTrack.Add(IMAGE,true);
+        }
+        
+    }
+    void revelCharacter(){
+        int randPos = Random.Range(0,Answer.Length);
+        blankSprites[randPos].GetComponent<BoxCollider>().enabled=false;
+        blankSprites[randPos].name=Answer[randPos].ToString();
+        blankSprites[randPos].sprite = Resources.Load<Sprite>(Answer[randPos].ToString());
+    }
     // Update is called once per frame
     void Update()
     {
+    	
+        
         if(findFirstBlank()==-1){
             SubmitAnswerAction(readAnswer());
         }
@@ -463,11 +633,29 @@ public class GameSceneRender : MonoBehaviour
         }
         else
         {
+
             levelTimer -= Time.deltaTime;
             timeDisplay.color = Color.red;
         }
-        
-        
+
+        if(fixedTimer-levelTimer>0.6 && levelTimer>=0){
+            Destroy(dynamicTimer[0]);
+            dynamicTimer.RemoveAt(0);
+            fixedTimer=levelTimer;
+        }
+
+        if(StaticClass.removeKey){
+            Debug.Log("Destroyed Object");
+            StaticClass.removeKey=false;
+            Destroy(ansPos[0]);
+            ansPos.RemoveAt(0);
+
+        }
+        if(StaticClass.tokenHint){
+            revelCharacter();
+            StaticClass.tokenHint=false;
+
+        }
 
         if (levelTimer<0){
     		image1.sprite=null;
@@ -487,14 +675,22 @@ public class GameSceneRender : MonoBehaviour
     	else{
 
         	   image1.sprite = questionSprites[0]; 
+               expandImageFrame(image1);  
+
         	   if(levelTimer<15){
-        	       image2.sprite = questionSprites[1]; 
+        	       image2.sprite = questionSprites[1];
+                   diff=0.002f;
+                   expandImageFrame(image2);
         		}
         		if(levelTimer<10){
         		   image3.sprite = questionSprites[2]; 
+                   diff=0.002f;
+                   expandImageFrame(image3);
         		}
         		if(levelTimer<5){
-        			image4.sprite = questionSprites[3]; 
+        			image4.sprite = questionSprites[3];
+                    diff=0.002f;
+                    expandImageFrame(image4);
         		}
                 
                 //Resources.Load<Sprite>("<file_name>");
@@ -510,6 +706,10 @@ public class GameSceneRender : MonoBehaviour
      IEnumerator ChangeScene(){
      	yield return new WaitForSeconds(1);
      	UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelectionScene");
+     }
+     IEnumerator NextQuestionScene(){
+        yield return new WaitForSeconds(1);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
      }
 
 }

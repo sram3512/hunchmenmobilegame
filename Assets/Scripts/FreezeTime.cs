@@ -32,7 +32,9 @@ public class FreezeTime : MonoBehaviour
     private class Questionpool
     {
         public int level;
-        public int question;
+        public int passed;
+        public List<int> question;
+
     }
 
 

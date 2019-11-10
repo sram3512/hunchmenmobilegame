@@ -66,12 +66,14 @@
      <Compile Include="Assets\Scripts\PrefrabThemeSelect.cs" />
      <Compile Include="Assets\Scripts\ReadInputField.cs" />
      <Compile Include="Assets\Scripts\RemoveChar.cs" />
+     <Compile Include="Assets\Scripts\RemoveKey.cs" />
      <Compile Include="Assets\Scripts\RenderImages.cs" />
      <Compile Include="Assets\Scripts\RenderSpriteURL.cs" />
      <Compile Include="Assets\Scripts\ReturntoTheme.cs" />
      <Compile Include="Assets\Scripts\SelectLevel.cs" />
      <Compile Include="Assets\Scripts\StaticClass.cs" />
      <Compile Include="Assets\Scripts\ThemeRender.cs" />
+     <Compile Include="Assets\Scripts\TokenHint.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />

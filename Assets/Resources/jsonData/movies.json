@@ -2,9 +2,9 @@
 "levels":[
 
 {
-            "name":"level1",
-            "difficulty":1,
-            "pool": [
+            "name":"level0",
+            "description":"EASY",
+            "questions": [
                      {
                         "answer":"batman",
                         "imageList":["batman1.jpg","batman3.jpg","batman2.jpg","batman4.jpg"]
@@ -17,9 +17,9 @@
 		  },
 
   {
-            "name":"level2",
-            "difficulty":2,
-            "pool": [
+            "name":"level1",
+            "description":"MEDIUM",
+            "questions": [
                      {
                         "answer":"thor",
                         "imageList": ["thor2.jpg","thor3.jpg","thor4.jpg","thor1.jpeg"]
@@ -32,9 +32,9 @@
                   },
 
   {
-            "name":"level3",
-            "difficulty":3,
-            "pool": [
+            "name":"level2",
+            "description":"HARD",
+            "questions": [
                      {
                         "answer":"tangled",
                         "imageList": ["tangled1.png","tangled4.jpg","tangled3.jpg","tangled2.jpg"]
@@ -49,29 +49,7 @@
                      }
                       
             ]
-                  },
-
-  {
-            "name":"level4",
-            "difficulty":3,
-            "pool": [
-                     {
-                        "answer":"rocky",
-                        "imageList":["rocky2.jpg","rocky3.jpg","rocky4.jpg","rocky1.jpg"]
-                     },
-                     {
-                        "answer":"twilight",
-                        "imageList":["twilight1.jpeg","twilight2.jpg","twilight3.jpg","twilight4.jpg"]
-                     },
-                     {
-                        "answer": "deadpool",
-                        "imageList": ["deadpool2.jpg","deadpool1.png","deadpool3.jpg","deadpool4.jpg"]
-                     }
-            ]
-                  }
-
-
-
+   }
 
   ],
 "imageServer":"http://spriteserver.sanupindi.com:5000/getimage?"
