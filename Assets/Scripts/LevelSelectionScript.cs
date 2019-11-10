@@ -29,7 +29,8 @@ public class LevelSelectionScript : MonoBehaviour
     [System.Serializable]
     private class Questionpool{
         public int level;
-        public int question;
+        public int passed;
+        public List<int> question;
     }
 
     User readUserinfo()
@@ -59,14 +60,15 @@ public class LevelSelectionScript : MonoBehaviour
         User userobj = readUserinfo();
 
         currencyText.text = userobj.currency.ToString();
+        string[] modes = new string[3]{"EASY","MEDIUM","HARD"};
 
     	float x = -14.93f;
-    	float y = 7.15f;
+    	float y = 6.15f;
     	float z = -5.23f;
-        StaticClass.MaxLevels = 9;
+        StaticClass.MaxLevels = 3;
         for (int i=0;i<StaticClass.MaxLevels;i++){
             var lvs = Instantiate(levelSign, new Vector3(x,y,z),Quaternion.identity);
-            lvs.GetComponent<TextMesh>().text = "Level "+(i+1).ToString();
+            lvs.GetComponent<TextMesh>().text = modes[i];
             x+=2.0f;
             if(i ==2 || i==5 || i==8){
                 y-=1.0f;

@@ -16,7 +16,7 @@ public class PicCharSelection : MonoBehaviour
         
     }
     void OnMouseDown(){
-    	
+    	Debug.Log("Entered");
         StaticClass.KeyBoardInput = gameObject.GetComponent<SpriteRenderer>().name;
     	
     }

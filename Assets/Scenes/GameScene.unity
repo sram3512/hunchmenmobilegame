@@ -314,6 +314,11 @@ MonoBehaviour:
     type: 3}
   currencyDisplay: {fileID: 3414506188881721824, guid: 86535fe635a354022ad8ecae0f67a512,
     type: 3}
+  removeKey: {fileID: 8734865412045625786, guid: 602f2149708e04c9f8fc50e26dd89590,
+    type: 3}
+  tokenHint: {fileID: 5681728446590138614, guid: a469972d8194145008d170525ace5383,
+    type: 3}
+  dTimer: {fileID: 7890133324325207469, guid: 50599a6cbb654433cb66266d9921ee15, type: 3}
 --- !u!1 &1482343782
 GameObject:
   m_ObjectHideFlags: 0

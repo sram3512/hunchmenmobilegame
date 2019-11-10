@@ -25,22 +25,35 @@ public class PrefrabSelectLevel : MonoBehaviour
     [System.Serializable]
     private class Questionpool{
         public int level;
-        public int question;
+        public int passed;
+        public List<int> question;
     }
 
     private int unlock;
     private string userPath;
+    public Dictionary<string,int> levelMap;
+
     void Start()
     {
         userPath = Application.persistentDataPath+"/user_info.json";
-        GetComponent<Renderer>().material.color = Color.yellow;
+        //GetComponent<Renderer>().material.color = Color.yellow;
         readUserJson();
+        levelMap = new Dictionary<string,int>();
+        levelMap.Add("EASY",0);
+        levelMap.Add("MEDIUM",1);
+        levelMap.Add("HARD",2);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        var levelValue = levelMap[GetComponent<TextMesh>().text];
+        if(levelValue<=unlock){
+            GetComponent<Renderer>().material.color = Color.red;
+        }
+        else{
+            GetComponent<Renderer>().material.color = Color.black;
+        }
     }
     void readUserJson(){
 
@@ -61,21 +74,10 @@ public class PrefrabSelectLevel : MonoBehaviour
             }
         }
     }
-    void OnMouseEnter(){
-        var levelValue = int.Parse(GetComponent<TextMesh>().text.Split()[1]);
-        if(levelValue<=unlock){
-            GetComponent<Renderer>().material.color = Color.red;
-        }
-    	
-
-    }
-    void OnMouseExit(){
-    	GetComponent<Renderer>().material.color = Color.yellow;
-    }
     void OnMouseDown(){
-        var levelValue = int.Parse(GetComponent<TextMesh>().text.Split()[1]);
+        var levelValue = levelMap[GetComponent<TextMesh>().text];
         if(levelValue<=unlock){
-        StaticClass.LevelSelection = GetComponent<TextMesh>().text.Split()[1];
+        StaticClass.LevelSelection = GetComponent<TextMesh>().text;
     	UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
         }
     }

@@ -32,7 +32,8 @@ public class ThemeRender : MonoBehaviour
     private class Questionpool
     {
         public int level;
-        public int question;
+        public int passed;
+        public List<int> question;
     }
 
     private User currencyObj;
@@ -56,9 +57,9 @@ public class ThemeRender : MonoBehaviour
 
         //Ensure to add new theme values here
         string jsonOutput="{\"name\":\"tommy\",\"email_id\":\"tommy@usc.edu\",\"currency\":0,\"progress\":";
-        jsonOutput += "[{\"theme\":\"movies\",\"unlocked\":3,\"previousQuestion\":[]},";
-        jsonOutput += "{\"theme\":\"halloween\",\"unlocked\":3,\"previousQuestion\":[]},";
-        jsonOutput += "{\"theme\":\"harrypotter\",\"unlocked\":3,\"previousQuestion\":[]}]}";
+        jsonOutput += "[{\"theme\":\"movies\",\"unlocked\":0,\"passed\":0,\"previousQuestion\":[]},";
+        jsonOutput += "{\"theme\":\"halloween\",\"unlocked\":0,\"passed\":0,\"previousQuestion\":[]},";
+        jsonOutput += "{\"theme\":\"harrypotter\",\"unlocked\":0,\"passed\":0,\"previousQuestion\":[]}]}";
         
         StreamWriter writer = new StreamWriter(userPath);
         writer.WriteLine(jsonOutput);
@@ -88,6 +89,7 @@ public class ThemeRender : MonoBehaviour
 
         var coinsAmount = Instantiate(currencyDisplay, new Vector3(-11.94f, 5.5f, -3.0f), Quaternion.identity);
     
+
         if(!File.Exists(userPath)){
             //Call the below func incase we add new Theme
             newUserCreation();
