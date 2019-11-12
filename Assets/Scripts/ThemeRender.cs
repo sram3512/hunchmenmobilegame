@@ -36,6 +36,41 @@ public class ThemeRender : MonoBehaviour
         public List<int> question;
     }
 
+    [System.Serializable]
+    public class Analytics
+    {
+        public string name;
+        public string email_id;
+        public int success_tries;
+        public int failure_tries;
+        public int all_tries;
+        public int freeze_time_count;
+        public int reveal_character_count;
+        public int delete_character_count;
+        public int sink_and_success_count;
+        public int sink_and_fail_count;
+        public int first_time_tries;
+        public int game_opened_count;
+        public List<ThemeWiseAnalytics> themeWise;
+        public List<LevelWiseAnalytics> levelWise;
+    }
+
+    [System.Serializable]
+    public class ThemeWiseAnalytics
+    {
+        public string name;
+        public int count;
+    }
+
+    [System.Serializable]
+    public class LevelWiseAnalytics
+    {
+        public string name;
+        public int count;
+    }
+
+
+
     private User currencyObj;
     User readUserinfo()
     {
@@ -66,6 +101,23 @@ public class ThemeRender : MonoBehaviour
         writer.Close();
 
     }
+
+    void createAnalyticsFile()
+    {
+
+        //Ensure to add new theme values here
+        string jsonOutput = "{\"name\":\"tommy\",\"email_id\":\"tommy@usc.edu\",\"success_tries\":0,\"failure_tries\":0,\"all_tries\":0,\"freeze_time_count\":0,\"game_opened_count\":1,\"reveal_character_count\":0,\"delete_character_count\":0,\"themewise\":[]}";
+        //jsonOutput += "[{\"theme\":\"movies\",\"unlocked\":0,\"passed\":0,\"previousQuestion\":[]},";
+        //jsonOutput += "{\"theme\":\"halloween\",\"unlocked\":0,\"passed\":0,\"previousQuestion\":[]},";
+        //jsonOutput += "{\"theme\":\"harrypotter\",\"unlocked\":0,\"passed\":0,\"previousQuestion\":[]}]}";
+
+        StreamWriter writer = new StreamWriter(StaticClass.analyticsFilePath);
+        writer.WriteLine(jsonOutput);
+        writer.Close();
+
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -94,6 +146,23 @@ public class ThemeRender : MonoBehaviour
             //Call the below func incase we add new Theme
             newUserCreation();
         }
+
+        if (!File.Exists(StaticClass.analyticsFilePath))
+        {
+            //Call the below func incase we add new Theme
+            StaticClass.firstTimePlayer = true;
+            createAnalyticsFile();
+            StaticClass.gameStarted = true;
+        }
+        else if (!StaticClass.gameStarted)
+        {
+            Analytics analytics = readAnalyticsFile();
+            analytics.game_opened_count += 1;
+            writeAnalyticsFile(analytics);
+            StaticClass.gameStarted = true;
+        }
+
+
     }
 
     // Update is called once per frame
@@ -102,5 +171,29 @@ public class ThemeRender : MonoBehaviour
         var coinsText1 = GameObject.FindWithTag("currencyValue").GetComponent<TextMesh>();
         User currencyObj = readUserinfo();        
         coinsText1.text = currencyObj.currency.ToString();
+    }
+
+    Analytics readAnalyticsFile()
+    {
+
+        StreamReader file = new StreamReader(StaticClass.analyticsFilePath);
+        string line;
+        string contents = "";
+        while ((line = file.ReadLine()) != null)
+        {
+            contents += line.Replace("\t", "");
+        }
+        file.Close();
+
+        return JsonUtility.FromJson<Analytics>(contents);
+
+    }
+
+    void writeAnalyticsFile(Analytics analytics)
+    {
+
+        StreamWriter writer = new StreamWriter(StaticClass.analyticsFilePath);
+        writer.WriteLine(JsonUtility.ToJson(analytics));
+        writer.Close();
     }
 }
