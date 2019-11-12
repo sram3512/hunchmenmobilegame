@@ -93,6 +93,40 @@ public class GameSceneRender : MonoBehaviour
         public List<int> question;
     }
 
+    [System.Serializable]
+    public class Analytics
+    {
+        public string name;
+        public string email_id;
+        public int success_tries;
+        public int failure_tries;
+        public int all_tries;
+        public int freeze_time_count;
+        public int reveal_character_count;
+        public int delete_character_count;
+        public int sink_and_success_count;
+        public int sink_and_fail_count;
+        public int first_time_tries;
+        public int game_opened_count;
+        public List<ThemeWiseAnalytics> themeWise;
+        public List<LevelWiseAnalytics> levelWise;
+    }
+
+    [System.Serializable]
+    public class ThemeWiseAnalytics
+    {
+        public string name;
+        public int count;
+    }
+
+    [System.Serializable]
+    public class LevelWiseAnalytics
+    {
+        public string name;
+        public int count;
+    }
+
+
 
     private Theme themeObject;
     private string Answer;
@@ -117,9 +151,12 @@ public class GameSceneRender : MonoBehaviour
     private float diff;
     private Dictionary<SpriteRenderer,bool> expandTrack;
 
+    private bool analyticsSuccessOrFailureComputed;
+    private bool freezeTimeComputed;
+    private bool sinkUsed;
+
     void Start()
     {
-
         //Dynamic Timer 
         dynamicTimer = new List<GameObject>();
 
@@ -213,9 +250,14 @@ public class GameSceneRender : MonoBehaviour
         keyBoardCreation();
         answerCreation();
 
-       StartCoroutine(fetchImages());
+        StartCoroutine(fetchImages());
 
+        analyticsSuccessOrFailureComputed = false;
+        freezeTimeComputed = false;
+        sinkUsed = false;
+        incrementLevelCount();
         createTimer();
+        incrementAllTriesCount();
 
 
     }
@@ -356,6 +398,7 @@ public class GameSceneRender : MonoBehaviour
         if (currencyTrigger==false){
             computeReward();
         }
+        incrementSuccessCount();
         resetSinks();
         if(themeInstance.previousQuestion[currentLevel].passed<themeInstance.previousQuestion[currentLevel].question.Count){
              StartCoroutine(NextQuestionScene());
@@ -363,6 +406,7 @@ public class GameSceneRender : MonoBehaviour
         else{
             StartCoroutine(ChangeScene());
         }
+
        
    	}
    }
@@ -444,8 +488,6 @@ public class GameSceneRender : MonoBehaviour
         
 
         try{
-
-           
             int poolSelection = randomQuestionWithTracking(themeObject.levels[gameLevel].questions.Count); 
         
             //int poolSelection=0;
@@ -461,10 +503,6 @@ public class GameSceneRender : MonoBehaviour
            
     }
     int randomQuestionWithTracking(int poolSize){
-
-
-           
-
             int pos = -1;
             bool found = false;
             
@@ -536,9 +574,125 @@ public class GameSceneRender : MonoBehaviour
         return JsonUtility.FromJson<User>(contents);
 
     }
+
+    Analytics readAnalyticsFile()
+    {
+
+        StreamReader file = new StreamReader(StaticClass.analyticsFilePath);
+        string line;
+        string contents = "";
+        while ((line = file.ReadLine()) != null)
+        {
+            contents += line.Replace("\t", "");
+        }
+        file.Close();
+
+        return JsonUtility.FromJson<Analytics>(contents);
+
+    }
+
+    void writeAnalyticsFile(Analytics analytics)
+    {
+
+        StreamWriter writer = new StreamWriter(StaticClass.analyticsFilePath);
+        writer.WriteLine(JsonUtility.ToJson(analytics));
+        writer.Close();
+    }
+
+    void incrementSuccessCount()
+    {
+        if (!analyticsSuccessOrFailureComputed)
+        {
+            analyticsSuccessOrFailureComputed = true;
+            Analytics analytics = readAnalyticsFile();
+            analytics.success_tries += 1;
+            if (sinkUsed)
+            {
+                analytics.sink_and_success_count += 1;
+            }
+            writeAnalyticsFile(analytics);
+        }
+    }
+
+    void incrementFailureCount()
+    {
+        if (!analyticsSuccessOrFailureComputed)
+        {
+            analyticsSuccessOrFailureComputed = true;
+            Analytics analytics = readAnalyticsFile();
+            analytics.failure_tries += 1;
+            if (sinkUsed)
+            {
+                analytics.sink_and_fail_count += 1;
+            }
+            writeAnalyticsFile(analytics);
+        }
+    }
+
+    void incrementAllTriesCount()
+    {
+        Analytics analytics = readAnalyticsFile();
+        analytics.all_tries += 1;
+        if (StaticClass.firstTimePlayer)
+        {
+            analytics.first_time_tries += 1;
+        }
+        writeAnalyticsFile(analytics);
+    }
+
+
+    void incrementFreezeTimeCount()
+    {
+        if (!freezeTimeComputed)
+        {
+            freezeTimeComputed = true;
+            Analytics analytics = readAnalyticsFile();
+            analytics.freeze_time_count += 1;
+            writeAnalyticsFile(analytics);
+        }
+    }
+
+    void incrementRevealCharacterCount()
+    {
+        Analytics analytics = readAnalyticsFile();
+        analytics.reveal_character_count += 1;
+        writeAnalyticsFile(analytics);
+    }
+
+    void incrementRemoveCharacterCount()
+    {
+        Analytics analytics = readAnalyticsFile();
+        analytics.delete_character_count += 1;
+        writeAnalyticsFile(analytics);
+    }
+
+    void incrementLevelCount()
+    {
+        Analytics analytics = readAnalyticsFile();
+        bool found = false;
+        foreach (LevelWiseAnalytics levelWiseAnalytics in analytics.levelWise)
+        {
+            if (levelWiseAnalytics.name.Equals(StaticClass.LevelSelection))
+            {
+                levelWiseAnalytics.count += 1;
+                found = true;
+            }
+        }
+        if (!found)
+        {
+            LevelWiseAnalytics levelWiseAnalytics = new LevelWiseAnalytics();
+            levelWiseAnalytics.name = StaticClass.LevelSelection;
+            levelWiseAnalytics.count = 1;
+            analytics.levelWise.Add(levelWiseAnalytics);
+        }
+        writeAnalyticsFile(analytics);
+    }
+
+
     void resetSinks(){
         StaticClass.freezeTimeEnabled=false;
-
+        freezeTimeComputed = false;
+        sinkUsed = false;
     }
     IEnumerator fetchImages(){
         Debug.Log("Fetching images");
@@ -600,6 +754,7 @@ public class GameSceneRender : MonoBehaviour
         blankSprites[randPos].GetComponent<BoxCollider>().enabled=false;
         blankSprites[randPos].name=Answer[randPos].ToString();
         blankSprites[randPos].sprite = Resources.Load<Sprite>(Answer[randPos].ToString());
+        incrementRevealCharacterCount();
     }
     // Update is called once per frame
     void Update()
@@ -623,11 +778,17 @@ public class GameSceneRender : MonoBehaviour
         if ((Time.time >= StaticClass.currentFreezeTimeEnd) && StaticClass.freezeTimeEnabled == true)
         {
             StaticClass.freezeTimeEnabled = false;
+            freezeTimeComputed = false;
 
         }
 
         if (StaticClass.freezeTimeEnabled)
         {
+            sinkUsed = true;
+            if (!freezeTimeComputed)
+            {
+                incrementFreezeTimeCount();
+            }
             levelTimer -= Time.deltaTime / StaticClass.freezeTimeFactor;
             timeDisplay.color = Color.cyan;
         }
@@ -645,13 +806,15 @@ public class GameSceneRender : MonoBehaviour
         }
 
         if(StaticClass.removeKey){
+            sinkUsed = true;
             Debug.Log("Destroyed Object");
             StaticClass.removeKey=false;
             Destroy(ansPos[0]);
+            incrementRemoveCharacterCount();
             ansPos.RemoveAt(0);
-
         }
         if(StaticClass.tokenHint){
+            sinkUsed = true;
             revelCharacter();
             StaticClass.tokenHint=false;
 
@@ -665,7 +828,9 @@ public class GameSceneRender : MonoBehaviour
     		timeDisplay.text="";
     		
     		infoMessage.text = "GAME\nOVER!!!!";
-    		
+
+            incrementFailureCount();
+            resetSinks();
     		
     		infoMessage.color = Color.red;
     		StartCoroutine(ChangeScene());

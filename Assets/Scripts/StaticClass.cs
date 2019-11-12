@@ -1,4 +1,4 @@
-﻿
+﻿using UnityEngine;
 
 public static class StaticClass 
 {
@@ -15,4 +15,8 @@ public static class StaticClass
    public static int removeKeyCost{ get; } = 200;
    public static bool tokenHint {get; set;}
    public static int tokenHintCost {get;} = 200;
+
+   public static string analyticsFilePath= Application.persistentDataPath + "/analytics.json";
+   public static bool firstTimePlayer = false;
+   public static bool gameStarted = false;
 }
