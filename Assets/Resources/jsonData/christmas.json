@@ -1,0 +1,98 @@
+{
+	"levels": [
+
+		{
+			"name": "level0",
+			"description": "EASY",
+			"questions": [{
+					"answer": "cookies",
+					"imageList": ["cookies1.jpg", "cookies2.jpg", "cookies3.jpg", "cookies4.jpg"]
+				},
+				{
+					"answer": "rudolph",
+					"imageList": ["rudolph1.jpg", "rudolph2.jpg", "rudolph3jpg", "rudolph4.jpg"]
+				},
+				{
+					"answer": "santa",
+					"imageList": ["santa1.jpg", "santa2.jpg", "santa3.jpg", "santa4.jpg"]
+				},
+				{
+					"answer": "sleigh",
+					"imageList": ["sleigh1.jpg", "sleigh2.jpg", "sleigh3.jpg", "sleigh4.jpg"]
+				},
+				{
+					"answer": "snowman",
+					"imageList": ["snowman1.png", "snowman2.jpg", "snowman3.jpg", "snowman4.jpg"]
+				},
+				{
+					"answer": "xmas",
+					"imageList": ["xmas1.png", "xmas2.jpg", "xmas3.jpg", "xmas4.jpeg"]
+				}
+			]
+		},
+
+		{
+			"name": "level1",
+			"description": "MEDIUM",
+			"questions": [{
+					"answer": "carols",
+					"imageList": ["carols1.jpg", "carols2.jpg", "carols3.jpg", "carols4.jpg"]
+				},
+				{
+					"answer": "eggnog",
+					"imageList": ["eggnog1.jpg", "eggnog2.jpg", "eggnog3.jpg", "eggnog4.jpeg"]
+				},
+				{
+					"answer": "elf",
+					"imageList": ["elf1.jpg", "elf2.jpg", "elf3.jpg", "elf4.jpg"]
+				},
+				{
+					"answer": "jingle",
+					"imageList": ["jingle1.jpg", "jingle2.jpg", "jingle3.jpg", "jingle4.jpg"]
+				},
+				{
+					"answer": "stocking",
+					"imageList": ["stocking1.jpg", "stocking2.jpg", "stocking3.jpg", "stocking4.jpg"]
+				},
+				{
+					"answer": "stuffing",
+					"imageList": ["stuffing1.jpeg", "stuffing2.jpg", "stuffing3.jpg", "stuffing4.jpg"]
+				}
+
+			]
+		},
+
+		{
+			"name": "level2",
+			"description": "HARD",
+			"questions": [{
+					"answer": "decorate",
+					"imageList": ["decorate1.jpg", "decorate2.jpg", "decorate3.jpg", "decorate4.jpg"]
+				},
+				{
+					"answer": "grinch",
+					"imageList": ["grinch1.png", "grinch2", "grinch3.jpg", "grinch4.jpg"]
+				},
+				{
+					"answer": "mistletoe",
+					"imageList": ["mistletoe1.jpg", "mistletoe2.jpg", "mistletoe3.png", "mistletoe4.png"]
+				},
+				{
+					"answer": "ornaments",
+					"imageList": ["ornaments1.jpg", "ornaments2.jpg", "ornaments3.jpg", "ornaments4.jpg"]
+				},
+				{
+					"answer": "tinsel",
+					"imageList": ["tinsel1.jpg", "tinsel2.jpg", "tinsel3.jpg", "tinsel4.jpg"]
+				},
+				{
+					"answer": "wreath",
+					"imageList": ["wreath1.jpg", "wreath2.jpg", "wreath3.jpg", "wreath4.jpg"]
+				}
+
+			]
+		}
+
+	],
+	"imageServer": "http://spriteserver.sanupindi.com:5000/getimage?"
+}

@@ -1,0 +1,98 @@
+{
+	"levels": [
+
+		{
+			"name": "level0",
+			"description": "EASY",
+			"questions": [{
+					"answer": "dating",
+					"imageList": ["dating1.png", "dating2.png", "dating3.png", "dating4.png"]
+				},
+				{
+					"answer": "fitness",
+					"imageList": ["fitness1.png", "fitness2.png", "fitness3.png", "fitness4.png"]
+				},
+				{
+					"answer": "match",
+					"imageList": ["match1.png", "match2.png", "match3.png", "match4.jpg"]
+				},
+				{
+					"answer": "music",
+					"imageList": ["music1.jpg", "music2.jpg", "music3.jpg", "music4.png"]
+				},
+
+				{
+					"answer": "racing",
+					"imageList": ["racing1.png", "racing2.png", "racing3.jpg", "racing4.jpeg"]
+				},
+				{
+					"answer": "reading",
+					"imageList": ["reading1.png", "reading2.jpg", "reading3.jpg", "reading4.png"]
+				}
+			]
+		},
+
+		{
+			"name": "level1",
+			"description": "MEDIUM",
+			"questions": [{
+					"answer": "education",
+					"imageList": ["education1.png", "education2.jpg", "education3.jpg", "education4.png"]
+				},
+				{
+					"answer": "endless",
+					"imageList": ["endless1.jpg", "endless2.jpg", "endless3.jpg", "endless4.jpg"]
+				},
+				{
+					"answer": "finance",
+					"imageList": ["finance1.jpg", "finance2.jpg", "finance3.png", "finance4.png"]
+				},
+				{
+					"answer": "medical",
+					"imageList": ["medical1.jpg", "medical2.png", "medical3.png", "medical4.jpeg"]
+				},
+				{
+					"answer": "shooter",
+					"imageList": ["shooter1.png", "shooter2.jpg", "shooter3.png", "shooter4.jpg"]
+				},
+				{
+					"answer": "puzzle",
+					"imageList": ["puzzle1.jpg", "puzzle2.png", "puzzle3.png", "puzzle4.png"]
+				}
+			]
+		},
+
+		{
+			"name": "level2",
+			"description": "HARD",
+			"questions": [{
+					"answer": "beauty",
+					"imageList": ["beauty1.png", "beauty2.png", "beauty3.jpeg", "beauty4.jpg"]
+				},
+				{
+					"answer": "business",
+					"imageList": ["business1.png", "business2.png", "business3.png", "business4.png"]
+				},
+				{
+					"answer": "daydream",
+					"imageList": ["daydream1.png", "daydream2.png", "daydream3.jpg", "daydream4.png"]
+				},
+				{
+					"answer": "messaging",
+					"imageList": ["messaging1.jpg", "messaging2.png", "messaging3.jpg", "messaging4.png"]
+				},
+				{
+					"answer": "streaming",
+					"imageList": ["streaming1.jpeg", "streaming2.png", "streaming3.png", "streaming4.png"]
+				},
+				{
+					"answer": "design",
+					"imageList": ["design1.png", "design2.png", "design3.png", "design4.png"]
+				}
+
+			]
+		}
+
+	],
+	"imageServer": "http://spriteserver.sanupindi.com:5000/getimage?"
+}
