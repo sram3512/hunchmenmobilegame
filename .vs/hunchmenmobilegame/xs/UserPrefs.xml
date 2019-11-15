@@ -1,9 +1,9 @@
 ﻿<Properties StartupConfiguration="{68547E86-328D-8642-19B9-FDB05BC5BB81}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ThemeRender.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameSceneRender.cs">
     <Files>
       <File FileName="Assets/Scripts/LevelSelectionScript.cs" Line="58" Column="25" />
-      <File FileName="Assets/Scripts/GameSceneRender.cs" Line="125" Column="59" />
-      <File FileName="Assets/Scripts/ThemeRender.cs" Line="63" Column="71" />
+      <File FileName="Assets/Scripts/ThemeRender.cs" Line="63" Column="9" />
+      <File FileName="Assets/Scripts/GameSceneRender.cs" Line="635" Column="33" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

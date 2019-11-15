@@ -44,6 +44,7 @@ public class GameSceneRender : MonoBehaviour
 
     private SpriteRenderer[] blankSprites;
     private List<GameObject> dynamicTimer;
+    private List<GameObject> colorDanger;
     private char[] alphabet = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O',
                                 'P','Q','R','S','T','U','V','W','X','Y','Z'};
 
@@ -122,6 +123,7 @@ public class GameSceneRender : MonoBehaviour
 
         //Dynamic Timer 
         dynamicTimer = new List<GameObject>();
+        colorDanger = new List<GameObject>();
 
 
         //Image Expansion parameters
@@ -144,7 +146,7 @@ public class GameSceneRender : MonoBehaviour
         currentLevel = levelMap[StaticClass.LevelSelection];
       
 
-        var coinsAmount = Instantiate(currencyDisplay, new Vector3(-3.50f, 1.77f, -5.0f), Quaternion.identity);
+        var coinsAmount = Instantiate(currencyDisplay, new Vector3(2.75f, 1.77f, -5.0f), Quaternion.identity);
         coinsAmount.GetComponent<Transform>().Rotate(new Vector3(0, 180, 0));
    
 
@@ -221,47 +223,38 @@ public class GameSceneRender : MonoBehaviour
     }
     void createTimer(){
         //dynamicTimer = new GameObject[40];
-        var dx=-1.6f;
-        var dy=-1.65f;
+        var dx=2.6f;
+        var dy=-2.15f;
         var dz=-5.0f;
-        for(int i=0;i<40;i++){
+        //int flag = 0;
+        for(int i=0;i<=80;i++){
             var tmpDyno = Instantiate(dTimer, new Vector3(dx,dy,dz),Quaternion.identity);
             tmpDyno.GetComponent<SpriteRenderer>().color=Color.green;
             dynamicTimer.Add(tmpDyno);
-            if(i<4){
+            if(i<24 ){
                 dx-=0.3f;
-                tmpDyno.GetComponent<SpriteRenderer>().color=Color.green;
+                //tmpDyno.GetComponent<SpriteRenderer>().color=Color.green;
             }
-            if(i==4){
-                dy+=0.4f;
-                tmpDyno.GetComponent<SpriteRenderer>().color=Color.green;
+
+
+            if (i > 24 && i < 39)
+            {
+                tmpDyno.GetComponent<Transform>().Rotate(new Vector3(0, 0, 90));
+                dy += 0.3f;
             }
-            if(i>4 && i<14){
-                tmpDyno.GetComponent<Transform>().Rotate(new Vector3(0,0,90));
-                tmpDyno.GetComponent<SpriteRenderer>().color=Color.green;
-                dy+=0.3f;
-            }
-            if(i>=14 && i<27){
+            if (i>39 && i<66){
                 dx+=0.3f;
-                tmpDyno.GetComponent<SpriteRenderer>().color=Color.yellow;
+
             }
-            if(i==27){
-                dy-=0.32f;
-                tmpDyno.GetComponent<SpriteRenderer>().color=Color.yellow;
+
+
+            if (i > 66 && i < 81)
+            {
+
+                tmpDyno.GetComponent<Transform>().Rotate(new Vector3(0, 0, 90));
+                dy -= 0.3f;
             }
-            if(i>27 && i<37){
-                tmpDyno.GetComponent<Transform>().Rotate(new Vector3(0,0,90));
-                tmpDyno.GetComponent<SpriteRenderer>().color=Color.red;
-                dy-=0.3f;
-            }
-            if(i==37){
-                tmpDyno.GetComponent<SpriteRenderer>().color=Color.red;
-            }
-            if(i>37){
-                dx-=0.3f;
-                tmpDyno.GetComponent<SpriteRenderer>().color=Color.red;
-            }
-            
+
         }
         //-2.9
         
@@ -307,7 +300,7 @@ public class GameSceneRender : MonoBehaviour
         char[] KeyBoard = genCharSet(Answer);
         //float x=2.75f;
         //float y=0.0f;
-        float x =-3.48f;
+        float x =-3.10f;
         float y =0.96f;
         for (int i=0;i<12;i++){
             
@@ -318,7 +311,7 @@ public class GameSceneRender : MonoBehaviour
             if (i==2 || i==5 || i==8 || i==12){
                 //x=2.75f;
                 //y-=0.5f;
-                x =-3.48f;
+                x =-3.10f;
                 y-=0.5f;
             }
             else{
@@ -334,7 +327,7 @@ public class GameSceneRender : MonoBehaviour
     void answerCreation(){
 
         float bx=-0.5f;
-        float by=-1.92f;
+        float by=-1.8f;
         blankSprites = new SpriteRenderer[Answer.Length];
       
         for(int i=0;i<Answer.Length;i++){
@@ -638,13 +631,26 @@ public class GameSceneRender : MonoBehaviour
             timeDisplay.color = Color.red;
         }
 
-        if(fixedTimer-levelTimer>0.6 && levelTimer>=0){
+        if(fixedTimer-levelTimer>0.29 && levelTimer>=0){
+            if (levelTimer < 13)
+            {
+                for (int i = 0; i < dynamicTimer.Count; i++)
+                    dynamicTimer[i].GetComponent<SpriteRenderer>().color = Color.yellow;
+            }
+            if (levelTimer < 5)
+            {
+                for (int i = 0; i < dynamicTimer.Count; i++)
+                    dynamicTimer[i].GetComponent<SpriteRenderer>().color = Color.red;
+            }
+
             Destroy(dynamicTimer[0]);
             dynamicTimer.RemoveAt(0);
             fixedTimer=levelTimer;
         }
 
-        if(StaticClass.removeKey){
+
+
+        if (StaticClass.removeKey){
             Debug.Log("Destroyed Object");
             StaticClass.removeKey=false;
             Destroy(ansPos[0]);
