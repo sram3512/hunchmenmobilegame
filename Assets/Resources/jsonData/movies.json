@@ -37,7 +37,7 @@
 			"description": "MEDIUM",
 			"questions": [{
 					"answer": "coco",
-					"imageList": ["coco1.jpg", "coco2.jpg", "coco3.jpg", "coco4.jpg"]
+					"imageList": ["coco1.jpg", "coco2.jpg", "coco3.JPG", "coco4.jpg"]
 				},
 				{
 					"answer": "jumanji",

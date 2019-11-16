@@ -67,7 +67,7 @@
 			"description": "HARD",
 			"questions": [{
 					"answer": "mammals",
-					"imageList": ["mammals1.jpg", "mammals2", "mammals3", "mammals4"]
+					"imageList": ["mammals1.jpg", "mammals2.jpg", "mammals3.jpg", "mammals4.jpg"]
 				},
 				{
 					"answer": "meander",

@@ -23,7 +23,7 @@
 				},
 				{
 					"answer": "quidditch",
-					"imageList": ["quidditch1.png", "quidditch2.png", "quidditch3.png", "quidditch4.png"]
+					"imageList": ["quidditch1.Jpg", "quidditch2.Jpg", "quidditch3.jpg", "quidditch4.jpeg"]
 				},
                 {
 					"answer": "hermione",
@@ -37,11 +37,11 @@
 			"description": "MEDIUM",
 			"questions": [{
 					"answer": "aurors",
-					"imageList": ["aurors1.jpg", "aurors2.jpg", "aurors3.jpg", "aurors4.jpg"]
+					"imageList": ["aurors1.JPG", "aurors2.jpg", "aurors3.jpg", "aurors4.jpg"]
 				},
 				{
 					"answer": "fluffy",
-					"imageList": ["fluffy1.jpg", "fluffy2.jpg", "fluffy3.jpg", "fluffy4.jpg"]
+					"imageList": ["fluffy1.png", "fluffy2.jpg", "fluffy3.jpg", "fluffy4.jpg"]
 				},
 				{
 					"answer": "ravenclaw",
@@ -74,8 +74,8 @@
 					"imageList": ["animagus1.jpg", "animagus2.jpg", "animagus3.jpg", "animagus4.jpg"]
 				},
 				{
-					"answer": "quidditch",
-					"imageList": ["quidditch1.jpg", "quidditch2.jpg", "quidditch3.jpg", "quidditch4.jpeg"]
+					"answer": "triwizard",
+					"imageList": ["triwizard1.jpg", "triwizard2.jpg", "triwizard3.jpeg", "triwizard4.jpg"]
 				},
 				{
 					"answer": "hogsmeade",
