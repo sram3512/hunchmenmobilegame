@@ -1,0 +1,98 @@
+{
+	"levels": [
+
+		{
+			"name": "level0",
+			"description": "EASY",
+			"questions": [{
+					"answer": "cold",
+					"imageList": ["cold1.jpg", "cold2.jpg", "cold3.jpg", "cold4.jpg"]
+				},
+				{
+					"answer": "flower",
+					"imageList": ["flower1.jpg", "flower2.jpg", "flower3.jpg", "flower4.jpg"]
+				},
+				{
+					"answer": "forest",
+					"imageList": ["forest1.jpg", "forest2.jpg", "forest3.jpg", "forest4.jpg"]
+				},
+				{
+					"answer": "heat",
+					"imageList": ["heat1.jpg", "heat2.jpg", "heat3.jpg", "heat4.jpg"]
+				},
+				{
+					"answer": "ice",
+					"imageList": ["ice1.jpg", "ice2.jpg", "ice3.jpg", "ice4.jpg"]
+				},
+				{
+					"answer": "rain",
+					"imageList": ["rain1.jpg", "rain2.jpg", "rain3.jpg", "rain4.png"]
+				}
+			]
+		},
+
+		{
+			"name": "level1",
+			"description": "MEDIUM",
+			"questions": [{
+					"answer": "bamboo",
+					"imageList": ["bamboo1.jpg", "bamboo2.jpg", "bamboo3.jpg", "bamboo4.jpg"]
+				},
+				{
+					"answer": "insect",
+					"imageList": ["insect1.jpg", "insect2.jpg", "insect3.jpg", "insect4.jpg"]
+				},
+				{
+					"answer": "ocean",
+					"imageList": ["ocean1.jpg", "ocean2.jpeg", "ocean3.jpg", "ocean4.jpg"]
+				},
+				{
+					"answer": "root",
+					"imageList": ["root1.jpg", "root2.jpg", "root3.jpg", "root4.jpg"]
+				},
+				{
+					"answer": "snow",
+					"imageList": ["snow1.jpg", "snow2.jpg", "snow3.jpg", "snow4.jpg"]
+				},
+				{
+					"answer": "volcano",
+					"imageList": ["volcano2.jpg", "volcano2.jpg", "volcano3.jpg", "volcano4.jpg"]
+				}
+
+            ]
+		},
+
+		{
+			"name": "level2",
+			"description": "HARD",
+			"questions": [{
+					"answer": "mammals",
+					"imageList": ["mammals1.jpg", "mammals2", "mammals3", "mammals4"]
+				},
+				{
+					"answer": "meander",
+					"imageList": ["meander1.jpg", "meander2.jpg", "meander3.jpg", "meander4.jpg"]
+				},
+				{
+					"answer": "mountain",
+					"imageList": ["mountain1.jpg", "mountain2.jpg", "mountain3.png", "mountain4.jpg"]
+				},
+				{
+					"answer": "orchard",
+					"imageList": ["orchard1.jpg", "orchard2.jpg", "orchard3.jpg", "orchard4.jpg"]
+				},
+				{
+					"answer": "prairie",
+					"imageList": ["prairie1.jpg", "prairie2.png", "prairie3.jpg", "prairie4.jpg"]
+				},
+				{
+					"answer": "scalding",
+					"imageList": ["scalding1.jpg", "scalding2.jpg", "scalding3.jpg", "scalding4.jpg"]
+				}
+
+            ]
+		}
+
+    ],
+	"imageServer": "http://spriteserver.sanupindi.com:5000/getimage?"
+}

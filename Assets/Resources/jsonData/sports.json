@@ -1,0 +1,98 @@
+{
+	"levels": [
+
+		{
+			"name": "level0",
+			"description": "EASY",
+			"questions": [{
+					"answer": "balls",
+					"imageList": ["ball1.jpg", "ball2.png", "ball3.png", "ball4.jpg"]
+				},
+				{
+					"answer": "baseball",
+					"imageList": ["baseball1.jpg", "baseball2.jpg", "baseball3.jpg", "baseball4.png"]
+				},
+				{
+					"answer": "bowling",
+					"imageList": ["bowling1.jpg", "bowling2.jpg", "bowling3.jpg", "bowling4.jpg"]
+				},
+				{
+					"answer": "chess",
+					"imageList": ["chess1.jpg", "chess2.jpg", "chess3.jpg", "chess4.jpg"]
+				},
+				{
+					"answer": "golf",
+					"imageList": ["golf1.jpg", "golf2.jpg", "golf3.jpg", "golf4.png"]
+				},
+				{
+					"answer": "pool",
+					"imageList": ["pool1.png", "pool2.jpg", "pool3.jpg", "pool4.jpg"]
+				}
+			]
+		},
+
+		{
+			"name": "level1",
+			"description": "MEDIUM",
+			"questions": [{
+					"answer": "football",
+					"imageList": ["football1.jpg", "football2.jpg", "football3.jpg", "football4.jpg"]
+				},
+				{
+					"answer": "soccer",
+					"imageList": ["soccer1.jpg", "soccer2.jpg", "soccer3.jpg", "soccer4.jpg"]
+				},
+				{
+					"answer": "sports",
+					"imageList": ["sports1.jpg", "sports2.jpg", "sports3.jpg", "sports4.jpg"]
+				},
+				{
+					"answer": "tennis",
+					"imageList": ["tennis1.jpg", "tennis2.png", "tennis3.jpg", "tennis4.jpg"]
+				},
+				{
+					"answer": "trophy",
+					"imageList": ["trophy1.png", "trophy2.jpg", "trophy3.jpg", "trophy4.jpg"]
+				},
+				{
+					"answer": "winner",
+					"imageList": ["winner1.png", "winner2.jpg", "winner3.jpg", "winner4.jpg"]
+				}
+
+			]
+		},
+
+		{
+			"name": "level2",
+			"description": "HARD",
+			"questions": [{
+					"answer": "badminton",
+					"imageList": ["badminton1.jpeg", "badminton2.png", "badminton3.jpg", "badminton4.jpg"]
+				},
+				{
+					"answer": "billiards",
+					"imageList": ["billiards1.png", "billiards2.jpg", "billiards3.jpg", "billiards4.jpg"]
+				},
+				{
+					"answer": "formula",
+					"imageList": ["formula1.jpg", "formula2.jpg", "formula3.jpeg", "formula4.png"]
+				},
+				{
+					"answer": "running",
+					"imageList": ["running1.jpg", "running2.png", "running3.jpg", "running4.jpg"]
+				},
+				{
+					"answer": "snooker",
+					"imageList": ["snooker1.png", "snooker2.jpg", "snooker3.jpg", "snooker4.jpg"]
+				},
+				{
+					"answer": "worldcup",
+					"imageList": ["worldcup1.jpg", "worldcup2.jpg", "worldcup3.jpg", "worldcup4.jpg"]
+				}
+
+			]
+		}
+
+	],
+	"imageServer": "http://spriteserver.sanupindi.com:5000/getimage?"
+}
