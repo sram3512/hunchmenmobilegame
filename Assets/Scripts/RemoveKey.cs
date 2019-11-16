@@ -34,15 +34,8 @@ public class RemoveKey : MonoBehaviour
     void Start()
     {
     	userPath = Application.persistentDataPath+"/user_info.json";
-    	userobj = readUserJson();
-    	if(userobj.currency>=StaticClass.removeKeyCost){
-    		GetComponent<SpriteRenderer>().sprite=Resources.Load<Sprite>("remove_key");
-    		enable=true;
-    	}
-    	else{
-    		GetComponent<SpriteRenderer>().sprite=Resources.Load<Sprite>("disable_remove_key");
-    		enable=false;
-    	}
+    	
+        StaticClass.removeKey=false;
         
     }
 
@@ -52,9 +45,11 @@ public class RemoveKey : MonoBehaviour
     	userobj = readUserJson();
     	if (StaticClass.removeKey==false && userobj.currency>=StaticClass.removeKeyCost){
     		enable=true;
+            GetComponent<SpriteRenderer>().sprite=Resources.Load<Sprite>("removeLetter");
     	}
     	else{
-    		GetComponent<SpriteRenderer>().sprite=Resources.Load<Sprite>("disable_remove_key");
+    		GetComponent<SpriteRenderer>().sprite=Resources.Load<Sprite>("removeLetterDisable");
+            enable=false;
     	}
         
     }

@@ -93,8 +93,11 @@ public class ThemeRender : MonoBehaviour
         //Ensure to add new theme values here
         string jsonOutput="{\"name\":\"tommy\",\"email_id\":\"tommy@usc.edu\",\"currency\":0,\"progress\":";
         jsonOutput += "[{\"theme\":\"movies\",\"unlocked\":0,\"passed\":0,\"previousQuestion\":[]},";
-        jsonOutput += "{\"theme\":\"halloween\",\"unlocked\":0,\"passed\":0,\"previousQuestion\":[]},";
-        jsonOutput += "{\"theme\":\"harrypotter\",\"unlocked\":0,\"passed\":0,\"previousQuestion\":[]}]}";
+        jsonOutput += "{\"theme\":\"sports\",\"unlocked\":0,\"passed\":0,\"previousQuestion\":[]},";
+        jsonOutput += "{\"theme\":\"harrypotter\",\"unlocked\":0,\"passed\":0,\"previousQuestion\":[]},";
+        jsonOutput += "{\"theme\":\"appgenres\",\"unlocked\":0,\"passed\":0,\"previousQuestion\":[]},";
+        jsonOutput += "{\"theme\":\"nature\",\"unlocked\":0,\"passed\":0,\"previousQuestion\":[]},";
+        jsonOutput += "{\"theme\":\"christmas\",\"unlocked\":0,\"passed\":0,\"previousQuestion\":[]}]}";
         
         StreamWriter writer = new StreamWriter(userPath);
         writer.WriteLine(jsonOutput);
@@ -105,12 +108,8 @@ public class ThemeRender : MonoBehaviour
     void createAnalyticsFile()
     {
 
-        //Ensure to add new theme values here
         string jsonOutput = "{\"name\":\"tommy\",\"email_id\":\"tommy@usc.edu\",\"success_tries\":0,\"failure_tries\":0,\"all_tries\":0,\"freeze_time_count\":0,\"game_opened_count\":1,\"reveal_character_count\":0,\"delete_character_count\":0,\"themewise\":[]}";
-        //jsonOutput += "[{\"theme\":\"movies\",\"unlocked\":0,\"passed\":0,\"previousQuestion\":[]},";
-        //jsonOutput += "{\"theme\":\"halloween\",\"unlocked\":0,\"passed\":0,\"previousQuestion\":[]},";
-        //jsonOutput += "{\"theme\":\"harrypotter\",\"unlocked\":0,\"passed\":0,\"previousQuestion\":[]}]}";
-
+        
         StreamWriter writer = new StreamWriter(StaticClass.analyticsFilePath);
         writer.WriteLine(jsonOutput);
         writer.Close();
@@ -123,12 +122,17 @@ public class ThemeRender : MonoBehaviour
     {
         userPath = Application.persistentDataPath+"/user_info.json";
         Debug.Log(userPath);
+        //applications ,nature and christmas
 
         var theme1 = Instantiate(themelabels, new Vector3(-17.67f,3.5f,-3.0f),Quaternion.identity);
         var theme2 = Instantiate(themelabels, new Vector3(-13.94f,3.5f,-3.0f),Quaternion.identity);
         var theme3 = Instantiate(themelabels, new Vector3(-9.51f,3.5f,-3.0f),Quaternion.identity);
         var theme4 = Instantiate(themelabels, new Vector3(-13.94f,1.5f,-3.0f),Quaternion.identity);
-    	
+    	var theme5 = Instantiate(themelabels, new Vector3(-17.67f,1.5f,-3.0f),Quaternion.identity);
+        var theme6 = Instantiate(themelabels, new Vector3(-9.51f,1.5f,-3.0f),Quaternion.identity);
+
+
+
 
         Instantiate(money, new Vector3(-12.94f,2.55f,-3.0f), Quaternion.identity);
         Instantiate(money, new Vector3(-12.44f,2.55f,-3.0f), Quaternion.identity);
@@ -136,12 +140,14 @@ public class ThemeRender : MonoBehaviour
 
     	theme1.GetComponent<TextMesh>().text = "Movies";
     	theme2.GetComponent<TextMesh>().text = "Harry Potter";
-    	theme3.GetComponent<TextMesh>().text = "Applications";
-        theme4.GetComponent<TextMesh>().text = "Halloween";
+    	theme3.GetComponent<TextMesh>().text = "App Genres";
+        theme4.GetComponent<TextMesh>().text = "Sports";
+        theme5.GetComponent<TextMesh>().text="Nature";
+        theme6.GetComponent<TextMesh>().text="Christmas";
 
         var coinsAmount = Instantiate(currencyDisplay, new Vector3(-11.94f, 5.5f, -3.0f), Quaternion.identity);
     
-
+       //newUserCreation();
         if(!File.Exists(userPath)){
             //Call the below func incase we add new Theme
             newUserCreation();
@@ -171,6 +177,7 @@ public class ThemeRender : MonoBehaviour
         var coinsText1 = GameObject.FindWithTag("currencyValue").GetComponent<TextMesh>();
         User currencyObj = readUserinfo();        
         coinsText1.text = currencyObj.currency.ToString();
+        coinsText1.color=Color.red;
     }
 
     Analytics readAnalyticsFile()

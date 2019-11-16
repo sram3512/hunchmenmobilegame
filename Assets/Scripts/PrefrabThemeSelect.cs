@@ -41,7 +41,7 @@ public class PrefrabThemeSelect : MonoBehaviour
 
     void Start()
     {
-        GetComponent<Renderer>().material.color = Color.yellow;
+        GetComponent<Renderer>().material.color = Color.black;
     }
 
     // Update is called once per frame
@@ -54,10 +54,11 @@ public class PrefrabThemeSelect : MonoBehaviour
 
     }
     void OnMouseExit(){
-    	GetComponent<Renderer>().material.color = Color.yellow;
+    	GetComponent<Renderer>().material.color = Color.black;
     }
     void OnMouseDown(){
 
+        StaticClass.backposition=0;
         StaticClass.ThemeSelection = GetComponent<TextMesh>().text.ToLower().Replace(" ","");
         incrementThemeSelection();
         UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelectionScene");

@@ -15,8 +15,11 @@ public static class StaticClass
    public static int removeKeyCost{ get; } = 200;
    public static bool tokenHint {get; set;}
    public static int tokenHintCost {get;} = 200;
+   public static int tokenHintLimit {get; set;}
+   public static int tokenHintUsed {get; set;}
 
    public static string analyticsFilePath= Application.persistentDataPath + "/analytics.json";
    public static bool firstTimePlayer = false;
    public static bool gameStarted = false;
+   public static int backposition {get; set;}
 }
