@@ -10,7 +10,7 @@
 				},
 				{
 					"answer": "deadpool",
-					"imageList": ["deadpool1.png", "deadpool2.jpg", "deadpool3.jpg", "deadpool4.jpeg"]
+					"imageList": ["deadpool1.png", "deadpool2.jpg", "deadpool3.jpg", "deadpool4.jpg"]
 				},
 				{
 					"answer": "rocky",
@@ -45,7 +45,7 @@
 				},
 				{
 					"answer": "moana",
-					"imageList": ["moana1.jpg", "moana2.jpg", "moana3.jpeg", "moana4.jpg"]
+					"imageList": ["moana1.jpg", "moana2.jpg", "moana3.jpg", "moana4.jpg"]
 				},
 
 				{
@@ -76,7 +76,7 @@
 				},
 				{
 					"answer": "juno",
-					"imageList": ["juno1.jpeg", "juno2.jpeg", "juno3.png", "juno4.jpeg"]
+					"imageList": ["juno1.jpeg", "juno2.jpg", "juno3.png", "juno4.jpeg"]
 				},
 				{
 					"answer": "scream",

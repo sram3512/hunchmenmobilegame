@@ -10,7 +10,7 @@
 				},
 				{
 					"answer": "dementor",
-					"imageList": ["dementor1.jpeg", "dementor2.jpg", "dementor3.jpg", "dementor4.jpg"]
+					"imageList": ["dementor1.jpg", "dementor2.jpg", "dementor3.jpg", "dementor4.jpg"]
 				},
 				{
 					"answer": "hagrid",
@@ -53,7 +53,7 @@
 				},
 				{
 					"answer": "weasley",
-					"imageList": ["weasley1.jpg", "weasley2.jpg", "weasley3.jpeg", "weasley4.jpg"]
+					"imageList": ["weasley1.jpg", "weasley2.jpg", "weasley3.jpg", "weasley4.jpg"]
 				},
                 {
 					"answer": "voldemort",
