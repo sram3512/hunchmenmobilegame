@@ -1,56 +1,98 @@
 {
-"levels":[
+	"levels": [
 
-{
-            "name":"level0",
-            "description":"EASY",
-            "questions": [
-                     {
-                        "answer":"batman",
-                        "imageList":["batman1.jpg","batman3.jpg","batman2.jpg","batman4.jpg"]
-                     },
-                     {
-                        "answer":"titanic",
-                        "imageList":["titanic1.jpg","titanic3.jpg","titanic2.jpeg","titanic4.jpg"]
-                     }
-    ]
-		  },
+		{
+			"name": "level0",
+			"description": "EASY",
+			"questions": [{
+					"answer": "batman",
+					"imageList": ["batman1.jpg", "batman2.jpg", "batman3.jpg", "batman4.jpg"]
+				},
+				{
+					"answer": "deadpool",
+					"imageList": ["deadpool1.png", "deadpool2.jpg", "deadpool3.jpg", "deadpool4.jpg"]
+				},
+				{
+					"answer": "rocky",
+					"imageList": ["rocky1.jpg", "rocky2.jpg", "rocky3.jpg", "rocky4.jpg"]
+				},
+				{
+					"answer": "titanic",
+					"imageList": ["titanic1.jpg", "titanic2.jpg", "titanic3.jpg", "titanic4.jpg"]
+				},
+				{
+					"answer": "thor",
+					"imageList": ["thor1.jpg", "thor2.jpg", "thor3.jpg", "thor4.jpg"]
+				},
+                {
+					"answer": "aladdin",
+					"imageList": ["aladdin1.jpeg","aladdin2.jpg","aladdin3.jpg","aladdin4.jpg"]
+				}
 
-  {
-            "name":"level1",
-            "description":"MEDIUM",
-            "questions": [
-                     {
-                        "answer":"thor",
-                        "imageList": ["thor2.jpg","thor3.jpg","thor4.jpg","thor1.jpeg"]
-                     },
-                     {
-                        "answer": "moana",
-                        "imageList": ["moana1.jpg","moana2.jpg","moana3.png","moana4.jpg"]
-                     }
-            ]
-                  },
+			]
+		},
 
-  {
-            "name":"level2",
-            "description":"HARD",
-            "questions": [
-                     {
-                        "answer":"tangled",
-                        "imageList": ["tangled1.png","tangled4.jpg","tangled3.jpg","tangled2.jpg"]
-                     },
-                     {
-                        "answer":"scarface",
-                        "imageList":["scarface1.jpg","scarface2.jpg","scarface3.jpg","scarface4.jpg"]
-                     },
-                     {
-                        "answer": "jumanji",
-                        "imageList": ["jumanji1.jpg", "jumanji2.png", "jumanji3.jpg", "jumanji4.jpg"]
-                     }
-                      
-            ]
-   }
+		{
+			"name": "level1",
+			"description": "MEDIUM",
+			"questions": [{
+					"answer": "coco",
+					"imageList": ["coco1.jpg", "coco2.jpg", "coco3.JPG", "coco4.jpg"]
+				},
+				{
+					"answer": "jumanji",
+					"imageList": ["jumanji1.jpg", "jumanji2.png", "jumanji3.jpg", "jumanji4.jpeg"]
+				},
+				{
+					"answer": "moana",
+					"imageList": ["moana1.jpg", "moana2.jpg", "moana3.jpg", "moana4.jpg"]
+				},
 
-  ],
-"imageServer":"http://spriteserver.sanupindi.com:5000/getimage?"
+				{
+					"answer": "tangled",
+					"imageList": ["tangled1.png", "tangled2.jpg", "tangled3.jpg", "tangled4.jpg"]
+				},
+                {
+					"answer": "frozen",
+					"imageList": ["frozen1.jpg","frozen2.jpeg","frozen3.jpg","frozen4.jpg"]
+				},
+                {
+					"answer": "jaws",
+					"imageList": ["jaws1.jpg","jaws2.jpg","jaws3.jpg","jaws4.jpg"]
+				}
+			]
+		},
+
+		{
+			"name": "level2",
+			"description": "HARD",
+			"questions": [{
+					"answer": "scarface",
+					"imageList": ["scarface1.jpg", "scarface2.jpg", "scarface3.jpg", "scarface4.jpg"]
+				},
+				{
+					"answer": "twilight",
+					"imageList": ["twilight1.jpeg", "twilight2.jpg", "twilight3.jpg", "twilight4.jpg"]
+				},
+				{
+					"answer": "juno",
+					"imageList": ["juno1.jpeg", "juno2.jpg", "juno3.png", "juno4.jpeg"]
+				},
+				{
+					"answer": "scream",
+					"imageList": ["scream1.jpg", "scream2.jpg", "scream3.jpg", "scream4.jpg"]
+				},
+                {
+					"answer": "gladiator",
+					"imageList": ["gladiator1.jpg","gladiator2.jpg","gladiator3.jpg","gladiator4.jpg"]
+				},
+                {
+					"answer": "poseidon",
+					"imageList": ["poseidon1.jpg","poseidon2.jpg","poseidon3.jpg","poseidon4.png"]
+				}
+			]
+		}
+
+	],
+	"imageServer": "http://spriteserver.sanupindi.com:5000/getimage?"
 }
