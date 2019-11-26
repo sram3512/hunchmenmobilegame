@@ -36,15 +36,6 @@ public class TokenHint : MonoBehaviour
     {
     	StaticClass.tokenHint=false;
     	userPath = Application.persistentDataPath+"/user_info.json";
-    	userobj = readUserJson();
-    	if(userobj.currency>=StaticClass.tokenHintCost){
-    		GetComponent<SpriteRenderer>().sprite=Resources.Load<Sprite>("token_hint");
-    		enable=true;
-    	}
-    	else{
-    		GetComponent<SpriteRenderer>().sprite=Resources.Load<Sprite>("disabled_token_hint");
-    		enable=false;
-    	}
         
     }
 
@@ -52,11 +43,13 @@ public class TokenHint : MonoBehaviour
     void Update()
     {
     	userobj = readUserJson();
-    	if(userobj.currency>=StaticClass.tokenHintCost && StaticClass.tokenHint==false){
+    	if(userobj.currency>=StaticClass.tokenHintCost && StaticClass.tokenHint==false && StaticClass.tokenHintUsed<StaticClass.tokenHintLimit){
+            GetComponent<SpriteRenderer>().sprite=Resources.Load<Sprite>("addLetter");
     		enable=true;
     	}
     	else{
-    		GetComponent<SpriteRenderer>().sprite=Resources.Load<Sprite>("disabled_token_hint");
+    		GetComponent<SpriteRenderer>().sprite=Resources.Load<Sprite>("addLetterDisable");
+            enable=false;
     	}
         
     }
@@ -87,7 +80,6 @@ public class TokenHint : MonoBehaviour
     		userobj.currency-=StaticClass.tokenHintCost;
     		writeUserinfo(userobj);
     	}
-    	
 
     }
 }

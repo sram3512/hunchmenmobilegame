@@ -9,6 +9,7 @@ public class LevelSelectionScript : MonoBehaviour
 	public GameObject levelSign;
     public GameObject currencyDisplay;
     public GameObject returnBack;
+    public GameObject menu;
     private string userPath;
 
     [System.Serializable]
@@ -55,15 +56,20 @@ public class LevelSelectionScript : MonoBehaviour
 
         var displayObj = Instantiate(currencyDisplay, new Vector3(-12.1f,8.06f,-5.23f),Quaternion.identity);
         Instantiate(returnBack, new Vector3(-12.3f,3.83f,-5.23f),Quaternion.identity);
+        
+        var menuObj = Instantiate(menu, new Vector3(-11.63f,6.49f,-5.23f),Quaternion.identity);
+        menuObj.GetComponent<Transform>().localScale = new Vector3(0.25f,0.25f,0.25f);
+
         var currencyText = GameObject.FindWithTag("currencyValue").GetComponent<TextMesh>();
 
         User userobj = readUserinfo();
 
         currencyText.text = userobj.currency.ToString();
+        currencyText.color = Color.red;
         string[] modes = new string[3]{"EASY","MEDIUM","HARD"};
 
     	float x = -14.93f;
-    	float y = 6.15f;
+    	float y = 5.15f;
     	float z = -5.23f;
         StaticClass.MaxLevels = 3;
         for (int i=0;i<StaticClass.MaxLevels;i++){

@@ -20,6 +20,7 @@ public class GameSceneRender : MonoBehaviour
     public GameObject removeKey;
     public GameObject tokenHint;
     public GameObject dTimer;
+    public GameObject returnBack;
 
 
 
@@ -47,6 +48,8 @@ public class GameSceneRender : MonoBehaviour
     private List<GameObject> colorDanger;
     private char[] alphabet = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O',
                                 'P','Q','R','S','T','U','V','W','X','Y','Z'};
+
+    private int gameLevel;
 
 
     [System.Serializable]
@@ -141,6 +144,7 @@ public class GameSceneRender : MonoBehaviour
     private Themeprogress themeInstance;
     public static int coinsTotal;
     private List<Object> ansPos;
+    private List<int> revcharPos;
 
     private bool remove;
     private Dictionary<string,int> levelMap;
@@ -158,10 +162,21 @@ public class GameSceneRender : MonoBehaviour
 
     void Start()
     {
+
+        //Revel Character Tracking
+         revcharPos= new List<int>();
+
+        //Back Button
+
+        var backBut=Instantiate(returnBack, new Vector3(-3.75f,1.61f,-5.00f),Quaternion.identity);
+        backBut.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
+        backBut.GetComponent<Transform>().localScale = new Vector3(0.35f,0.35f,0.35f);
         //Dynamic Timer 
         dynamicTimer = new List<GameObject>();
         colorDanger = new List<GameObject>();
 
+        //LimitTokenHint
+        StaticClass.tokenHintUsed=0;
 
         //Image Expansion parameters
         expandTrack = new Dictionary<SpriteRenderer,bool>();
@@ -183,43 +198,44 @@ public class GameSceneRender : MonoBehaviour
         currentLevel = levelMap[StaticClass.LevelSelection];
       
 
-        var coinsAmount = Instantiate(currencyDisplay, new Vector3(2.75f, 1.77f, -5.0f), Quaternion.identity);
+        var coinsAmount = Instantiate(currencyDisplay, new Vector3(2.55f, 1.77f, -5.0f), Quaternion.identity);
         coinsAmount.GetComponent<Transform>().Rotate(new Vector3(0, 180, 0));
    
 
         var coinsText1 = GameObject.FindWithTag("currencyValue").GetComponent<TextMesh>();
         //coinVal = Instantiate(coins, new Vector3(0.55f, 2.06f, -5.0f), Quaternion.identity).GetComponent<TextMesh>();
 
-        Instantiate(freezeTime, new Vector3(2.2f, 0.91f, -5.0f), Quaternion.identity);
+        Instantiate(freezeTime, new Vector3(2.0f, 0.91f, -5.0f), Quaternion.identity);
         freezeTimeObject = freezeTime.gameObject;
 
-        var rmObj = Instantiate(removeKey, new Vector3(2.20f,-0.11f,-5.0f),Quaternion.identity);
+        var rmObj = Instantiate(removeKey, new Vector3(2.0f,-0.11f,-5.0f),Quaternion.identity);
 
         rmObj.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
-        rmObj.GetComponent<Transform>().localScale = new Vector3(0.5f,0.5f,0.5f);
+        rmObj.GetComponent<Transform>().localScale = new Vector3(0.17f,0.17f,0.17f);
 
-        var tokObj = Instantiate(tokenHint, new Vector3(2.20f,-1.14f,-5.0f),Quaternion.identity);
+        var tokObj = Instantiate(tokenHint, new Vector3(2.0f,-1.14f,-5.0f),Quaternion.identity);
         tokObj.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
-        tokObj.GetComponent<Transform>().localScale = new Vector3(0.5f,0.5f,0.5f);
+        tokObj.GetComponent<Transform>().localScale = new Vector3(0.17f,0.17f,0.17f);
 
 
         User currencyObj = readUserinfo();
         
         //coinVal.text = currencyObj.currency.ToString();
         coinsText1.text = currencyObj.currency.ToString();
+        coinsText1.color =Color.red;
 
-        var levelIndicator = Instantiate(hud,new Vector3(0.7f,2.06f,-5.0f),Quaternion.identity);
-        var textmeshLevel = levelIndicator.GetComponent<TextMesh>();
+        //var levelIndicator = Instantiate(hud,new Vector3(0.7f,2.06f,-5.0f),Quaternion.identity);
+        //var textmeshLevel = levelIndicator.GetComponent<TextMesh>();
 
-        timeDisplay = Instantiate(hud, new Vector3(-1.34f,2.06f,-5.0f),Quaternion.identity).GetComponent<TextMesh>();
-        timeDisplay.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
+        //timeDisplay = Instantiate(hud, new Vector3(-1.34f,2.06f,-5.0f),Quaternion.identity).GetComponent<TextMesh>();
+        //timeDisplay.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
 
         infoMessage = Instantiate(hud, new Vector3(-0.82f,0.3f,-5.0f),Quaternion.identity).GetComponent<TextMesh>();
         infoMessage.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
 
 
 
-        levelIndicator.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
+        //levelIndicator.GetComponent<Transform>().Rotate(new Vector3(0,180,0));
 
         image1=Instantiate(imageHolder, new Vector3(-2.58f,0.15f,-5.0f),Quaternion.identity).GetComponent<SpriteRenderer>();
         image2=Instantiate(imageHolder, new Vector3(-0.9f,0.15f,-5.0f),Quaternion.identity).GetComponent<SpriteRenderer>();
@@ -233,8 +249,8 @@ public class GameSceneRender : MonoBehaviour
         image4.GetComponent<Transform>().localScale = new Vector3(0.5f,0.5f,0.5f);
 
         
-        textmeshLevel.text = StaticClass.LevelSelection;
-        textmeshLevel.color = Color.red;
+        //textmeshLevel.text = StaticClass.LevelSelection;
+        ///textmeshLevel.color = Color.red;
 
         levelTimer = 25;
         fixedTimer = 25;
@@ -278,18 +294,28 @@ public class GameSceneRender : MonoBehaviour
                 //tmpDyno.GetComponent<SpriteRenderer>().color=Color.green;
             }
 
-
+            if(i==24){
+                dx-=0.07f;
+            }
             if (i > 24 && i < 39)
             {
                 tmpDyno.GetComponent<Transform>().Rotate(new Vector3(0, 0, 90));
                 dy += 0.3f;
             }
+            if(i==39){
+                dy+=0.2f;
+                tmpDyno.GetComponent<Transform>().Rotate(new Vector3(0, 0, 90));
+                dy-=0.1f;
+            }
+
             if (i>39 && i<66){
                 dx+=0.3f;
 
             }
 
-
+            if(i==66){
+            	dx-=0.05f;
+            }
             if (i > 66 && i < 81)
             {
 
@@ -298,7 +324,6 @@ public class GameSceneRender : MonoBehaviour
             }
 
         }
-        //-2.9
         
     }
     char[] shuffle(char[] keyboard){
@@ -368,10 +393,11 @@ public class GameSceneRender : MonoBehaviour
     }
     void answerCreation(){
 
-        float bx=-0.5f;
+        float bx=0.5f;
         float by=-1.8f;
         blankSprites = new SpriteRenderer[Answer.Length];
-      
+        StaticClass.tokenHintLimit=(int)Answer.Length/2;
+
         for(int i=0;i<Answer.Length;i++){
             var blk = Instantiate(blankCharacter, new Vector3(bx,by,-5.0f), Quaternion.identity);
             blk.name="Blank";
@@ -387,13 +413,14 @@ public class GameSceneRender : MonoBehaviour
    		
       	infoMessage.text = "Correct";
       	infoMessage.color = Color.green;
-      	timeDisplay.text="";
+      	//timeDisplay.text="";
         if (currencyTrigger==false){
             computeReward();
         }
         incrementSuccessCount();
         resetSinks();
-        if(themeInstance.previousQuestion[currentLevel].passed<themeInstance.previousQuestion[currentLevel].question.Count){
+        themeInstance = readTheme(readUserinfo());
+        if(themeInstance.previousQuestion[currentLevel].passed<themeObject.levels[gameLevel].questions.Count){
              StartCoroutine(NextQuestionScene());
         }
         else{
@@ -458,7 +485,7 @@ public class GameSceneRender : MonoBehaviour
         Themeprogress thm = readTheme(currencyObj);
         thm.previousQuestion[currentLevel].passed+=1;
 
-        if(thm.previousQuestion[currentLevel].passed>=5 && thm.unlocked==currentLevel && thm.unlocked+1<StaticClass.MaxLevels){
+        if(thm.previousQuestion[currentLevel].passed>=(themeObject.levels[gameLevel].questions.Count/2)&& thm.unlocked==currentLevel && thm.unlocked+1<StaticClass.MaxLevels){
             thm.unlocked += 1;
             
         }
@@ -472,7 +499,7 @@ public class GameSceneRender : MonoBehaviour
       
         imageserverURL = themeObject.imageServer;
         
-        int gameLevel =-1; 
+        gameLevel =-1; 
         for(int i=0;i<themeObject.levels.Count;i++){
             if(themeObject.levels[i].name=="level"+currentLevel.ToString()){
                 gameLevel=i;
@@ -486,6 +513,12 @@ public class GameSceneRender : MonoBehaviour
             //int poolSelection=0;
             Answer = themeObject.levels[gameLevel].questions[poolSelection].answer;
             Questions = themeObject.levels[gameLevel].questions[poolSelection].imageList;
+
+            //Create removechar tracker
+
+            for(int i=0;i<Answer.Length;i++){
+                revcharPos.Add(i);
+            }
         }
         catch (System.ArgumentOutOfRangeException e){
              infoMessage.text = "Missing\nQuestions.";
@@ -686,7 +719,11 @@ public class GameSceneRender : MonoBehaviour
         StaticClass.freezeTimeEnabled=false;
         freezeTimeComputed = false;
         sinkUsed = false;
+        StaticClass.tokenHint=false;
     }
+
+ 
+
     IEnumerator fetchImages(){
         Debug.Log("Fetching images");
 
@@ -697,8 +734,14 @@ public class GameSceneRender : MonoBehaviour
             yield return spriteURL;
 
             try{
-                //
-                questionSprites[i] = Sprite.Create(spriteURL.texture,new Rect(0, 0, spriteURL.texture.width,spriteURL.texture.height), new Vector2(0, 0));
+                //spriteURL.texture.width,spriteURL.texture.height
+               
+                 //= spriteURL.texture;
+                 //var tmpspriteTexture= ResizeCanvas(spriteURL.texture,300,300);
+                var tmpspriteTexture = spriteURL.texture;
+                //tmpspriteTexture.Resize(300,300);
+                //tmpspriteTexture.Apply();
+                questionSprites[i] = Sprite.Create(tmpspriteTexture,new Rect(0, 0, tmpspriteTexture.width,tmpspriteTexture.height), new Vector2(0, 0),100.0f);
             }
             catch(System.NullReferenceException e){
                 infoMessage.text = "Is the\nserver up?";
@@ -710,17 +753,17 @@ public class GameSceneRender : MonoBehaviour
     }
     void expandImageFrame(SpriteRenderer IMAGE){
 
-        if(expandTrack.ContainsKey(IMAGE)){
+        //if(expandTrack.ContainsKey(IMAGE)){
 
-            if (expandTrack[IMAGE]){
+            //if (expandTrack[IMAGE]){
               
                 IMAGE.GetComponent<Transform>().localScale = new Vector3(xs,ys,zs);
-                if(xs<0.75f && !revt){
+                //if(xs<0.75f && !revt){
                     xs+=diff;
                     ys+=diff;
                     zs+=diff;
-                }
-                else{
+                //}
+                  /*  else{
                     revt=true;
                 }
                    
@@ -732,22 +775,32 @@ public class GameSceneRender : MonoBehaviour
 
                 if(revt && xs<=0.49){
                     revt=false;
-                    expandTrack[IMAGE]=false;
-                }
+                    //expandTrack[IMAGE]=false;
+                }*/
 
-            }
-        }
+            //}
+        /*}
         else{
             expandTrack.Add(IMAGE,true);
-        }
+        }*/
         
     }
     void revelCharacter(){
-        int randPos = Random.Range(0,Answer.Length);
-        blankSprites[randPos].GetComponent<BoxCollider>().enabled=false;
-        blankSprites[randPos].name=Answer[randPos].ToString();
-        blankSprites[randPos].sprite = Resources.Load<Sprite>(Answer[randPos].ToString());
-        incrementRevealCharacterCount();
+         
+                    
+            int randPos = shuffleInt(revcharPos.ToArray())[0];
+
+            revcharPos.RemoveAt(randPos);
+            Debug.Log(randPos);
+            Debug.Log(revcharPos.Count);
+            blankSprites[randPos].GetComponent<BoxCollider>().enabled=false;
+            blankSprites[randPos].name=Answer[randPos].ToString();
+            blankSprites[randPos].sprite = Resources.Load<Sprite>(Answer[randPos].ToString());
+            incrementRevealCharacterCount();
+                    
+            StaticClass.tokenHint=false;
+            StaticClass.tokenHintUsed+=1;
+            
     }
     // Update is called once per frame
     void Update()
@@ -766,7 +819,7 @@ public class GameSceneRender : MonoBehaviour
             StaticClass.KeyBoardInput=null;
         }
 
-        timeDisplay.text = ":" + System.String.Format("{0:0.0}", levelTimer);
+        //timeDisplay.text = ":" + System.String.Format("{0:0.0}", levelTimer);
 
         if ((Time.time >= StaticClass.currentFreezeTimeEnd) && StaticClass.freezeTimeEnabled == true)
         {
@@ -783,13 +836,13 @@ public class GameSceneRender : MonoBehaviour
                 incrementFreezeTimeCount();
             }
             levelTimer -= Time.deltaTime / StaticClass.freezeTimeFactor;
-            timeDisplay.color = Color.cyan;
+            //timeDisplay.color = Color.cyan;
         }
         else
         {
 
             levelTimer -= Time.deltaTime;
-            timeDisplay.color = Color.red;
+            //timeDisplay.color = Color.red;
         }
 
         if(fixedTimer-levelTimer>0.29 && levelTimer>=0){
@@ -821,8 +874,6 @@ public class GameSceneRender : MonoBehaviour
         if(StaticClass.tokenHint){
             sinkUsed = true;
             revelCharacter();
-            StaticClass.tokenHint=false;
-
         }
 
         if (levelTimer<0){
@@ -830,7 +881,7 @@ public class GameSceneRender : MonoBehaviour
     		image2.sprite=null;
     		image3.sprite=null;
     		image4.sprite=null;
-    		timeDisplay.text="";
+    		//timeDisplay.text="";
     		
     		infoMessage.text = "GAME\nOVER!!!!";
 
@@ -844,22 +895,51 @@ public class GameSceneRender : MonoBehaviour
     	}
     	else{
 
-        	   image1.sprite = questionSprites[0]; 
-               expandImageFrame(image1);  
+                if(levelTimer<=25 && levelTimer>15){
 
-        	   if(levelTimer<15){
+                     if(levelTimer<=25 && levelTimer>20){
+                        diff=0.0004f;
+                    }
+                    else{
+                       diff=-0.0004f;
+                    }
+                    
+        	       image1.sprite = questionSprites[0]; 
+                   expandImageFrame(image1);  
+                   
+                }
+        	   else if(levelTimer<=15 && levelTimer>10){
+
+                    if(levelTimer<=15 && levelTimer>12.5f){
+                        diff=0.0008f;
+                    }
+                    else{
+                       diff=-0.0008f;
+                    }
+                
         	       image2.sprite = questionSprites[1];
-                   diff=0.002f;
                    expandImageFrame(image2);
         		}
-        		if(levelTimer<10){
+        		else if(levelTimer<=10 && levelTimer>5){
+
+                     if(levelTimer<=10 && levelTimer>7.5f){
+                        diff=0.0008f;
+                    }
+                    else{
+                       diff=-0.0008f;
+                    }
         		   image3.sprite = questionSprites[2]; 
-                   diff=0.002f;
                    expandImageFrame(image3);
         		}
-        		if(levelTimer<5){
+        		else{
+
+                     if(levelTimer<=5 && levelTimer>2.5f){
+                        diff=0.0008f;
+                    }
+                    else{
+                       diff=-0.0008f;
+                    }
         			image4.sprite = questionSprites[3];
-                    diff=0.002f;
                     expandImageFrame(image4);
         		}
                 

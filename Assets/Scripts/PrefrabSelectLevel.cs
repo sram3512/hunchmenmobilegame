@@ -77,6 +77,7 @@ public class PrefrabSelectLevel : MonoBehaviour
     void OnMouseDown(){
         var levelValue = levelMap[GetComponent<TextMesh>().text];
         if(levelValue<=unlock){
+            StaticClass.backposition=1;
         StaticClass.LevelSelection = GetComponent<TextMesh>().text;
     	UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
         }
